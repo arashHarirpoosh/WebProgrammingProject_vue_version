@@ -1,17 +1,42 @@
 <template>
   <div id="app">
-<!--    <img alt="Vue logo" src="../assets/logo.png">-->
+    <ArrowDown/>
+    <!--    <img alt="Vue logo" src="../assets/logo.png">-->
     <dev class="flex-main-container">
       <dev class="title_part">
         <Header/>
       </dev>
       <dev class="flex-hero-header">
         <HeroHeader/>
-        <div class="flex-pic-part">
+<!--        <div class="flex-pic-part">-->
+        <div>
           <img class="clock-img" src="../assets/clock.png">
         </div>
       </dev>
-      <dev class="flex-others"></dev>
+      <div class="flex-others">
+        <div class="order-part">
+          <div>
+            مرتب سازی بر اساس:
+          </div>
+          <button>بیشترین فروش</button>
+          <button>قیمت</button>
+        </div>
+        <div class="products-part">
+          <div class="flex-item-product">
+
+          </div>
+          <div class="flex-item-filters">
+            <div class="flex-category-part">
+              category
+            </div>
+
+            <div class="flex-set-price-part">
+              order
+            </div>
+
+          </div>
+        </div>
+      </div>
       <Footer/>
     </dev>
 
@@ -24,10 +49,12 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HeroHeader from "../components/HeroHeader";
+import ArrowDown from "../components/ArrowDown";
 
 export default {
   name: 'App',
   components: {
+    ArrowDown,
     Header,
     HeroHeader,
     Footer
@@ -78,7 +105,7 @@ export default {
 .flex-hero-header{
   /*float: left;*/
   /*width: 100%;*/
-  flex: 35%;
+  flex: 30%;
   /*width: 100%;*/
   display: flex;
   flex-direction: column;
@@ -95,21 +122,105 @@ export default {
     other part of the flex container
  */
 .flex-others {
-  flex: 53%;
+  flex: 70%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  text-align: center;
   /*float: top;*/
   /*width: 100%;*/
   /*height: 60%;*/
+  /*padding:5px 5px 5px 5px;*/
   background-color: darkgrey;
   border: 1px solid red;
 }
 
+/*
+    Design of the clk img in hero header
+ */
 .clock-img {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
+  width: 40%;
+}
+
+/*
+    Design the partition of the order parts
+ */
+.order-part {
+  flex: 50px;
+  direction: rtl;
+  display: flex;
+  align-items: center;
+  /*justify-content: space-evenly;*/
+  /*float: left;*/
+  font-size: 1.5vw;
+  /*height: 50px;*/
+  margin: 7.5px;
+  background-color: white;
+  border: 1px solid blue;
+
+}
+
+/*
+    Design of the product part
+ */
+.products-part {
+  flex: 100%;
+  display: flex;
+  flex-direction: row;
+  /*align-items: center;*/
+  margin: 7.5px;
+  background-color: grey;
+  border: 1px solid blue;
+
+}
+
+/*
+    Design the partition of the part which product cards placed
+ */
+.flex-item-product {
+  flex: 75%;
+  margin: 7.5px;
+  background-color: white;
+  border: 1px solid orchid;
+
+}
+
+/*
+    Design the partition of the part which category and price filter placed
+ */
+.flex-item-filters {
+  flex: 25%;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  margin: 7.5px;
+  /*background-color: white;*/
+  border: 1px solid orchid;
+}
+
+/*
+    Design the partition of the category filter
+ */
+.flex-category-part {
+  flex: 60%;
+  margin: 7.5px;
+  background-color: white;
+  border: 1px solid orchid;
+
+}
+
+/*
+    Design the partition of the price filter
+ */
+.flex-set-price-part {
+  flex: 40%;
+  margin: 7.5px;
+  background-color: white;
+  border: 1px solid orchid;
+
 }
 
 #app {

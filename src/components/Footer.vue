@@ -11,14 +11,20 @@ export default {
 </script>
 
 <style scoped>
-  .footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: rgb(49, 52, 54);
-    color: rgb(114, 120, 125);
-    text-align: center;
-    font-size: 1vw;
-  }
+/*
+    footer part of the flex container
+ */
+.footer {
+  /*flex: 2%;*/
+  /*position: fixed;*/
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgb(49, 52, 54);
+  color: rgb(114, 120, 125);
+  text-align: center;
+  font-size: 1vw;
+  border: 1px solid red;
+
+}
 </style>
