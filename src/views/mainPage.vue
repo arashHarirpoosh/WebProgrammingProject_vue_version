@@ -62,7 +62,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 @font-face {
   font-family: 'Yekan';
   src: url('https://cdn.fontcdn.ir/Font/Persian/Yekan/Yekan.eot');
