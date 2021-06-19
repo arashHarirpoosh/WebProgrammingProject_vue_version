@@ -14,9 +14,15 @@ export default {
 </script>
 
 <style scoped>
+
+/*
+    Design of button placed in hero header
+ */
 .search-btn {
   font-size: 1.1vw;
-  background-color: rgba(255, 192, 8, 0.99);
+  width: 100%;
+  /*background-color: rgba(255, 192, 8, 0.99);*/
+  background-color: rgb(255, 200, 10);
   display:block;
   padding:0.3em 1.2em;
   margin:0 0.1em 0.1em 0;
@@ -32,13 +38,11 @@ export default {
   /*text-shadow: 0 0.04em 0.04em rgba(0,0,0,0.35);*/
   text-align:center;
   transition: all 0.2s;
-
-  /*width: 0%;*/
-  /*box-shadow: 2px 8px 30px -3px rgba(253, 205, 86, 0.99);*/
-
-  /*cursor: pointer;*/
 }
 
+/*
+    Design of button placed in hero header on hover
+ */
 .search-btn:hover {
   margin-top: 0px;
   -moz-box-shadow: 0px 0px 4px 1px grey;
@@ -46,4 +50,5 @@ export default {
   box-shadow: 0px 0px 4px 1px  grey;
 
 }
+
 </style>

@@ -73,4 +73,15 @@ export default {
   /*font-size: 0.7vw;*/
 }
 
+/*
+    Design the partition of the search button
+ */
+.btn-part {
+  flex: 33%;
+  width: 10%;
+  /*border: 1px solid blue;*/
+
+}
+
+
 </style>

@@ -1,68 +1,30 @@
 <template>
   <div id="app">
-    <ArrowDown/>
-    <!--    <img alt="Vue logo" src="../assets/logo.png">-->
     <div class="flex-main-container">
+      <ArrowDown/>
+      <!--    <img alt="Vue logo" src="../assets/logo.png">-->
       <div class="title_part">
         <Header/>
       </div>
-      <div class="flex-hero-header">
-        <HeroHeader/>
-<!--        <div class="flex-pic-part">-->
-        <div>
-          <img class="clock-img" src="../assets/clock.png">
-        </div>
-      </div>
-      <div class="flex-others">
-        <div class="order-part">
-          <div>
-            مرتب سازی بر اساس:
-          </div>
-          <button>بیشترین فروش</button>
-          <button>قیمت</button>
-        </div>
-        <div class="products-part">
-          <div class="flex-item-product">
-
-          </div>
-          <div class="flex-item-filters">
-            <div class="flex-category-part">
-              category
-            </div>
-
-            <div class="flex-set-price-part">
-              order
-            </div>
-
-          </div>
-        </div>
-      </div>
       <Footer/>
+      <router-view/>
     </div>
-
-<!--    <HelloWorld msg="Welcome to Your Vue.js App"/>-->
+    <!--    <HelloWorld msg="Welcome to Your Vue.js App"/>-->
   </div>
 </template>
 
 <script>
-// import HelloWorld from '../components/HelloWorld.vue'
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import HeroHeader from "../components/HeroHeader";
-import ArrowDown from "../components/ArrowDown";
-
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import ArrowDown from "./components/ArrowDown";
+// import HeroHeader from "./components/HeroHeader";
 export default {
-  name: 'App',
-  components: {
-    ArrowDown,
-    Header,
-    HeroHeader,
-    Footer
-  }
+  name: "App",
+  components: { ArrowDown, Footer, Header}
 }
 </script>
 
-<style>
+<style scoped>
 @font-face {
   font-family: 'Yekan';
   src: url('https://cdn.fontcdn.ir/Font/Persian/Yekan/Yekan.eot');
