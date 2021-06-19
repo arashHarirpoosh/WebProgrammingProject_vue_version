@@ -15,7 +15,8 @@
         </div>
 
         <div class="flex-parts-login">
-          <InputTextFiled label_name="رمز عبور" label_type="password" label_place_holder="رمز عبور خود را وارد کنید..."/>
+          <InputTextFiled label_kind="pass" label_name="رمز عبور" label_type="password" label_place_holder="رمز عبور خود را وارد کنید..."/>
+<!--          <InputTextFiled label_name="رمز عبور" v-bind:label_disable=false label_type="password" label_place_holder="رمز عبور خود را وارد کنید..."/>-->
         </div>
 
         <div class="flex-form-btn">
