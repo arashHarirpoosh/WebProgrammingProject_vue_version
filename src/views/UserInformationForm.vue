@@ -29,8 +29,8 @@
 </template>
 
 <script>
-import InputTextFiled from "./InputTextFiled";
-import Button from "./Button";
+import InputTextFiled from "../components/InputTextFiled";
+import Button from "../components/Button";
 export default {
   name: "UserInformationForm",
   components: {Button, InputTextFiled},

@@ -41,7 +41,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 // import InputTextFiled from "../components/InputTextFiled";
 // import Button from "../components/Button";
-import UserInformationForm from "../components/UserInformationForm";
+import UserInformationForm from "./UserInformationForm";
 export default {
   name: "signUpPage",
   components: {UserInformationForm, Footer, Header}

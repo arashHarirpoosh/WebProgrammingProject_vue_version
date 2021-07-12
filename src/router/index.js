@@ -2,6 +2,10 @@ import { createRouter, createWebHistory } from 'vue-router'
 import mainPage from "../views/mainPage";
 import logInPage from "../views/logInPage";
 import signUpPage from "../views/signUpPage";
+import adminCategoryLists from "../views/adminCategoryLists";
+import userReceipts from "../views/userReceipts";
+import adminReceipts from "../views/adminReceipts";
+import adminProducts from "../views/adminProducts";
 
 const routes = [
     {
@@ -20,6 +24,30 @@ const routes = [
         path: '/signUp',
         name: 'SignUpPage',
         component: signUpPage,
+    },
+
+    {
+        path: '/adminProfile',
+        name: 'adminCategoryLists',
+        component: adminCategoryLists,
+    },
+
+    {
+        path: '/usrReceipts',
+        name: 'userReceipts',
+        component: userReceipts,
+    },
+
+    {
+        path: '/adminReceipts',
+        name: 'adminReceipts',
+        component: adminReceipts,
+    },
+
+    {
+        path: '/adminProducts',
+        name: 'adminProducts',
+        component: adminProducts,
     }
 ]
 
