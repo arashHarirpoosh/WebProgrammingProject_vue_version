@@ -24,7 +24,7 @@ export default {
   color: rgb(114, 120, 125);
   text-align: center;
   font-size: 1vw;
-  border: 1px solid red;
+  /*border: 1px solid red;*/
 
 }
 </style>

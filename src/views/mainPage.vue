@@ -38,6 +38,7 @@
         </div>
       </div>
       <Footer/>
+      <router-view/>
     </div>
 
 <!--    <HelloWorld msg="Welcome to Your Vue.js App"/>-->

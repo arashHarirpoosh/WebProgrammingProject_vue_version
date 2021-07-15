@@ -1,5 +1,5 @@
 <template>
-  <button class="search-btn">
+  <button type="button" class="search-btn">
     {{ btn_text }}
   </button>
 </template>

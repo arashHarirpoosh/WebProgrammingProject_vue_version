@@ -6,6 +6,10 @@
       <div class="title_part">
         <Header/>
       </div>
+
+      <div class="flex-body">
+
+      </div>
       <Footer/>
       <router-view/>
     </div>
@@ -47,7 +51,7 @@ export default {
   /*top: 65px;*/
   height: 100%;
   width: 100%;
-  /*background-color: gray;*/
+  background-color: gray;
 }
 
 /*
@@ -184,6 +188,11 @@ export default {
 
 }
 
+.flex-body {
+  flex: 82%;
+  flex-grow: 1;
+  border: 1px solid orchid;
+}
 #app {
   /*font-family: Avenir, Helvetica, Arial, sans-serif;*/
   font-size: 16px;
