@@ -51,7 +51,7 @@ export default {
   /*top: 65px;*/
   height: 100%;
   width: 100%;
-  background-color: gray;
+  background-color: rgb(247, 247, 247);
 }
 
 /*

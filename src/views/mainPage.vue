@@ -8,7 +8,7 @@
       </div>
       <div class="flex-hero-header">
         <HeroHeader/>
-<!--        <div class="flex-pic-part">-->
+        <!--        <div class="flex-pic-part">-->
         <div>
           <img class="clock-img" src="../assets/clock.png">
         </div>
@@ -26,9 +26,7 @@
 
           </div>
           <div class="flex-item-filters">
-            <div class="flex-category-part">
-              category
-            </div>
+            <FilterBox :categories="categories"/>
 
             <div class="flex-set-price-part">
               order
@@ -41,7 +39,7 @@
       <router-view/>
     </div>
 
-<!--    <HelloWorld msg="Welcome to Your Vue.js App"/>-->
+    <!--    <HelloWorld msg="Welcome to Your Vue.js App"/>-->
   </div>
 </template>
 
@@ -51,14 +49,21 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HeroHeader from "../components/HeroHeader";
 import ArrowDown from "../components/ArrowDown";
-
+import FilterBox from "../components/FilterBox";
 export default {
   name: 'App',
   components: {
+    FilterBox,
     ArrowDown,
     Header,
     HeroHeader,
     Footer
+  },
+  data(){
+    return{categories: []}
+  },
+  created() {
+    this.categories = ["دسته بندی 1", "دسته بندی 2", "دسته بندی 3", "دسته بندی 4", "دسته بندی 5"]
   }
 }
 </script>
@@ -72,6 +77,8 @@ export default {
   url('https://cdn.fontcdn.ir/Font/Persian/Yekan/Yekan.ttf') format('truetype');
   font-weight: normal;
 }
+
+*{box-sizing: border-box}
 
 /*
     Flex Container that contains menu, hero header, others and footer
@@ -88,7 +95,6 @@ export default {
   width: 100%;
   /*background-color: gray;*/
 }
-
 /*
     Title part of the flex container
  */
@@ -98,7 +104,6 @@ export default {
   /*background-color: #111111;*/
   border: 1px solid red;
 }
-
 /*
     hero header part of the flex container
  */
@@ -116,8 +121,6 @@ export default {
   background-color: orange;
   border: 1px solid red;
 }
-
-
 /*
     other part of the flex container
  */
@@ -134,7 +137,6 @@ export default {
   background-color: rgb(247, 247, 247);
   border: 1px solid red;
 }
-
 /*
     Design of the clk img in hero header
  */
@@ -144,7 +146,6 @@ export default {
   margin-right: auto;
   width: 40%;
 }
-
 /*
     Design the partition of the order parts
  */
@@ -160,9 +161,7 @@ export default {
   margin: 7.5px;
   background-color: white;
   border: 1px solid blue;
-
 }
-
 /*
     Design of the product part
  */
@@ -174,9 +173,7 @@ export default {
   margin: 7.5px;
   background-color: rgb(247, 247, 247);
   border: 1px solid blue;
-
 }
-
 /*
     Design the partition of the part which product cards placed
  */
@@ -185,44 +182,32 @@ export default {
   margin: 7.5px;
   background-color: white;
   border: 1px solid orchid;
-
 }
-
 /*
     Design the partition of the part which category and price filter placed
  */
-.flex-item-filters {
-  flex: 25%;
-  height: 60%;
+.flex-item-filters{
   display: flex;
   flex-direction: column;
-  margin: 7.5px;
-  /*background-color: white;*/
-  border: 1px solid orchid;
+  width: 25%;
+  height: 100%;
+  border: solid yellow;
+  padding: 0;
+  direction: rtl;
 }
-
 /*
     Design the partition of the category filter
  */
-.flex-category-part {
-  flex: 60%;
-  margin: 7.5px;
-  background-color: white;
-  border: 1px solid orchid;
-
-}
 
 /*
     Design the partition of the price filter
  */
 .flex-set-price-part {
-  flex: 40%;
+  flex: 30%;
   margin: 7.5px;
   background-color: white;
   border: 1px solid orchid;
-
 }
-
 #app {
   /*font-family: Avenir, Helvetica, Arial, sans-serif;*/
   font-size: 16px;

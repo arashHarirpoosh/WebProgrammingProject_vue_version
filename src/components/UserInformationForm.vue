@@ -57,6 +57,7 @@
 import InputTextFiled from "./InputTextFiled";
 import Button from "./Button";
 import Modal from "./Modal";
+
 export default {
   name: "UserInformationForm",
   components: {Modal, Button, InputTextFiled},
