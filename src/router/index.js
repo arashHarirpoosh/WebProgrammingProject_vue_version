@@ -6,6 +6,8 @@ import adminCategoryLists from "../views/adminCategoryLists";
 import userReceipts from "../views/userReceipts";
 import adminReceipts from "../views/adminReceipts";
 import adminProducts from "../views/adminProducts";
+import admin from "../views/admin";
+import userProfile from "../views/userProfile";
 
 const routes = [
     {
@@ -48,6 +50,18 @@ const routes = [
         path: '/adminProducts',
         name: 'adminProducts',
         component: adminProducts,
+    },
+
+    {
+        path: '/admin',
+        name: 'admin',
+        component: admin,
+    },
+
+    {
+        path: '/userProfile',
+        name: 'userProfile',
+        component: userProfile,
     }
 ]
 

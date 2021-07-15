@@ -64,7 +64,6 @@ export default {
   /*height: 50%;*/
   background-color: rgb(247, 247, 247);
   /*border: 1px solid red;*/
-
 }
 
 /*
@@ -91,7 +90,6 @@ export default {
   color: rgb(14, 186, 197);
   margin: 15px;
   /*border: 1px solid red;*/
-
 }
 
 /*

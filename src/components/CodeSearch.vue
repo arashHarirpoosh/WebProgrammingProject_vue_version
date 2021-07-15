@@ -18,7 +18,7 @@ export default {
   display: flex;
   justify-content: center;
   flex-direction: row;
-  margin: 7px;
+  margin: 25px 25px 0;
   width: 40%;
   /*border: 1px solid red;*/
   direction: rtl;

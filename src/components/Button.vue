@@ -48,7 +48,6 @@ export default {
   -moz-box-shadow: 0px 0px 4px 1px grey;
   -webkit-box-shadow: 0px 0px 4px 1px grey;
   box-shadow: 0px 0px 4px 1px  grey;
-
 }
 
 </style>

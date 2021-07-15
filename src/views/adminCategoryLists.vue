@@ -5,7 +5,7 @@
     <div id="mainContainer">
       <div class="container">
         <div>
-          <h2>ادمین عزیز، خوش آمدید</h2>
+          <h2 style="margin-bottom: 0">ادمین عزیز، خوش آمدید</h2>
         </div>
         <ToggleButton :number="3"/>
         <div><input id="btn_createProduct" type="button" value="+ایجاد دسته بندی جدید"/></div>
