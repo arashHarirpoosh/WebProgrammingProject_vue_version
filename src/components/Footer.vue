@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <p>تمامی حقوق برای توسعه دهندگان محفوظ است</p>
+    <p>تمامی حقوق برای توسعه دهندگان آرش حریرپوش و محسن محمدیان محفوظ است</p>
   </div>
 </template>
 
@@ -15,8 +15,8 @@ export default {
     footer part of the flex container
  */
 .footer {
-  /*flex: 2%;*/
-  position: fixed;
+  /*flex: 5%;*/
+  flex-shrink: 0;
   left: 0;
   bottom: 0;
   width: 100%;

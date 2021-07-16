@@ -69,7 +69,8 @@ export default {
 .dialog {
   background-color: white;
   position: relative;
-  width: 600px;
+  /*width: 600px;*/
+  max-width: 450px;
   margin: 50px auto;
   display: flex;
   flex-direction: column;

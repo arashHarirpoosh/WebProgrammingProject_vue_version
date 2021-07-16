@@ -1,28 +1,128 @@
 <template>
-  <div class="flex-search-part">
-    <div class="search-label">
-      <p>در محصولات سایت جستجو کنید...</p>
+  <div id="heroHeader" class="flex-hero-header" :style="{backgroundImage:'url(' + imgAddr + ')'}">
+    <div class="flex-search-part">
+      <div class="search-label">
+        <p>در محصولات سایت جستجو کنید...</p>
+      </div>
+
+      <div class="search-input-part">
+        <!-- Next button -->
+        <div class="slider-btn">
+          <a class="prev" @click="plusSlides(-1)">&#10094;</a>
+        </div>
+        <!-- Search input -->
+        <div class="search">
+          <input class="search-input" type="text" placeholder="نام محصول خود را وارد کنید" id="secondBox_txtBox">
+        </div>
+        <!-- Previous Button -->
+        <div class="slider-btn">
+          <a class="next" @click="plusSlides(1)">&#10095;</a>
+        </div>
+      </div>
+
+      <div class="btn-part">
+        <!--      <button class="search-btn">جستجو کنید</button>-->
+        <Button btn_text="جستجو کنید"/>
+      </div>
+
     </div>
-    <div class="search-input-part">
-      <input class="search-input" type="text" placeholder="نام محصول خود را وارد کنید" id="secondBox_txtBox">
-    </div>
-    <div class="btn-part">
-<!--      <button class="search-btn">جستجو کنید</button>-->
-      <Button btn_text="جستجو کنید"/>
+
+    <div>
+      <img id="heroHeaderImg" class="clock-img" src="../assets/clock.png">
     </div>
 
   </div>
+
+
 </template>
 
 <script>
 import Button from "./Button";
+import img1 from "../assets/slidesPhoto/slider1.jpg"
+import img2 from "../assets/slidesPhoto/slider2.jpg"
+import img3 from "../assets/slidesPhoto/slider3.jpg"
+import clockImg from "../assets/clock.png"
+import compImg from "../assets/slidesPhoto/computer.png"
+import toolsImg from "../assets/slidesPhoto/tools.jpg"
+
 export default {
   name: "HeroHeader",
-  components: {Button}
+  components: {Button},
+  data(){
+    return {
+      slideIndex: 0,
+      imgAddr:img1
+    }
+  },
+  mounted() {
+    this.startSlider()
+  },
+  methods: {
+    showSlides() {
+      // let background = document.getElementById("heroHeader")
+      let img = document.getElementById("heroHeaderImg")
+      // console.log(this.slideIndex)
+      if (this.slideIndex === 0) {
+        this.imgAddr = img1
+        img.src = clockImg
+
+        // background.style.backgroundColor = 'orange'
+      }
+      else if (this.slideIndex === 1) {
+        this.imgAddr = img2
+        img.src = compImg
+
+        // background.style.backgroundColor = 'red'
+      }
+      else {
+        this.imgAddr = img3
+        img.src = toolsImg
+        // background.style.backgroundColor = 'yellow'
+      }
+      this.slideIndex += 1
+      this.slideIndex %= 3
+    },
+
+    startSlider() {
+      this.showSlides()
+      setTimeout(this.startSlider, 10000); // Change image every 10 seconds
+    },
+
+    plusSlides(n) {
+      this.slideIndex += n
+      if (this.slideIndex < 0) {
+        this.slideIndex -= n
+      }
+      this.slideIndex %= 3
+
+      this.showSlides();
+    }
+  },
 }
+
 </script>
 
+
 <style scoped>
+/*
+    hero header part of the flex container
+ */
+.flex-hero-header{
+  background-size: cover;
+  /*max-width: 100%;*/
+  /*float: left;*/
+  /*width: 100%;*/
+  flex: 30%;
+  /*width: 100%;*/
+  display: flex;
+  flex-direction: column;
+  /*height: 40%;*/
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: orange;
+  border: 1px solid red;
+}
 .flex-search-part {
   display: flex;
   flex-direction: column;
@@ -31,8 +131,6 @@ export default {
 
   flex: 80%;
   width: 100%;
-  /*border: 1px solid blue;*/
-
 }
 
 /*
@@ -53,11 +151,17 @@ export default {
  */
 .search-input-part {
   /*flex: 35px;*/
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   flex: 60px;
-  width: 25%;
+  width: 100%;
   /*border: 1px solid blue;*/
 }
 
+.search {
+  flex: 98%;
+}
 /*
   Design of the text box field in hero header
 */
@@ -66,7 +170,7 @@ export default {
   border-radius:2em;
   /*height: 100%;*/
   /*height: 100%;*/
-  width: 100%;
+  width: 25%;
   height: 35px;
   /*height: 10%;*/
   text-align: center;
@@ -81,6 +185,46 @@ export default {
   width: 10%;
   /*border: 1px solid blue;*/
 
+}
+
+/*
+    Design of the clk img in hero header
+ */
+.clock-img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+}
+
+.slider-btn {
+  flex: 1%;
+}
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  flex: 1%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 1.5vw;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+
+/* Position the "next button" to the right */
+.next {
+  left: 30%;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
 }
 
 

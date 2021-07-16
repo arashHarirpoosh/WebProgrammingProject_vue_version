@@ -1,6 +1,8 @@
 <template>
   <div id="filtersContainer">
-    <div style="width: 100%"><h5 id="filtersTitle">دسته بندی ها</h5></div>
+    <div style="width: 100%">
+      <h5 id="filtersTitle">دسته بندی ها</h5>
+    </div>
     <div class="container">
       <label class="script" :key="c" v-for="c in categories">
         <input type="checkbox">
@@ -33,19 +35,18 @@ export default {
 }
 #filtersContainer{
   display: flex;
-  flex-wrap: wrap;
+  /*flex-wrap: wrap;*/
   flex-direction: column;
   border: 3px solid #d5cece;
   border-radius: .2em;
   box-shadow: 20px 20px 200px 1px #d5cece;
-  height: 70%;
+  height: 100%;
   width: 100%;
   padding-bottom: 0;
 }
 
 #filtersTitle{
   border-bottom: solid #d5cece 1px;
-  width: 100%;
   text-align: right;
   padding: 15px;
   margin-top: 0;

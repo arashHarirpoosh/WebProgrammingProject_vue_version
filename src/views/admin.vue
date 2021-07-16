@@ -196,8 +196,8 @@ html, body{
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 70%;
-  width: 70%;
+  height: 80%;
+  width: 80%;
   border: solid red;
 }
 .title_part {

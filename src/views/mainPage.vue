@@ -1,18 +1,15 @@
 <template>
   <div id="app">
-    <ArrowDown/>
     <!--    <img alt="Vue logo" src="../assets/logo.png">-->
     <div class="flex-main-container">
+
       <div class="title_part">
+        <ArrowDown/>
         <Header/>
       </div>
-      <div class="flex-hero-header">
-        <HeroHeader/>
-        <!--        <div class="flex-pic-part">-->
-        <div>
-          <img class="clock-img" src="../assets/clock.png">
-        </div>
-      </div>
+
+      <HeroHeader />
+
       <div class="flex-others">
         <div class="order-part">
           <div>
@@ -26,17 +23,20 @@
 
           </div>
           <div class="flex-item-filters">
+
             <FilterBox :categories="categories"/>
 
-            <div class="flex-set-price-part">
-              order
-            </div>
+<!--            <div class="flex-set-price-part">-->
+<!--              order-->
+<!--            </div>-->
 
           </div>
         </div>
       </div>
+
       <Footer/>
       <router-view/>
+
     </div>
 
     <!--    <HelloWorld msg="Welcome to Your Vue.js App"/>-->
@@ -93,34 +93,21 @@ export default {
   /*top: 65px;*/
   height: 100%;
   width: 100%;
+  /*overflow: scroll;*/
   /*background-color: gray;*/
 }
+
 /*
     Title part of the flex container
  */
 .title_part {
   flex: 65px;
+  flex-shrink: 0;
   /*height: 65px;*/
   /*background-color: #111111;*/
   border: 1px solid red;
 }
-/*
-    hero header part of the flex container
- */
-.flex-hero-header{
-  /*float: left;*/
-  /*width: 100%;*/
-  flex: 30%;
-  /*width: 100%;*/
-  display: flex;
-  flex-direction: column;
-  /*height: 40%;*/
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background-color: orange;
-  border: 1px solid red;
-}
+
 /*
     other part of the flex container
  */
@@ -137,15 +124,7 @@ export default {
   background-color: rgb(247, 247, 247);
   border: 1px solid red;
 }
-/*
-    Design of the clk img in hero header
- */
-.clock-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 40%;
-}
+
 /*
     Design the partition of the order parts
  */
@@ -182,6 +161,7 @@ export default {
   margin: 7.5px;
   background-color: white;
   border: 1px solid orchid;
+  /*overflow: scroll;*/
 }
 /*
     Design the partition of the part which category and price filter placed
@@ -190,14 +170,11 @@ export default {
   display: flex;
   flex-direction: column;
   width: 25%;
-  height: 100%;
+  height: 60%;
   border: solid yellow;
   padding: 0;
   direction: rtl;
 }
-/*
-    Design the partition of the category filter
- */
 
 /*
     Design the partition of the price filter
