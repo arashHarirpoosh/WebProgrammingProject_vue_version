@@ -2,24 +2,24 @@
   <form class="flex-main-box">
     <div class="flex-parts-signup">
       <InputTextFiled  ref="form_name" id="name_part" label_name="نام" label_type="text" @input="check_name_input"
-                       :label_place_holder=[[name_place_holder]] :label_disable=label_disabled />
+                       :label_place_holder=[[name_place_holder]] :label_disabled=disable_label />
       <InputTextFiled ref="form_family_name" id="family_name_part" label_name="نام خانوادگی" label_type="text"
                       @input="check_family_name"
-                      :label_place_holder=[[family_name_place_holder]] :label_disable=label_disabled />
+                      :label_place_holder=[[family_name_place_holder]] :label_disabled=disable_label />
     </div>
 
     <div class="flex-parts-signup">
       <InputTextFiled ref="form_email" id="email_part" label_name="ایمیل" label_type="email" @input="check_email"
-                      :label_place_holder=[[email_place_holder]] :label_disable=label_disabled />
+                      :label_place_holder=[[email_place_holder]] :label_disabled=disable_label />
 
       <!--          ToDo:min-length need to be added-->
       <InputTextFiled ref="form_pass" id="pass_part" label_kind="pass" label_name="رمز عبور" label_type="password"
-                      @input="check_pass" :label_place_holder=[[password_place_holder]] :label_disable=label_disabled />
+                      @input="check_pass" :label_place_holder=[[password_place_holder]] :label_disabled=disable_label />
     </div>
 
     <div class="flex-parts-signup">
       <InputTextFiled ref="form_address" id="addr_part" label_kind="address" true label_name="آدرس" label_type="text"
-                      @input="check_addr" :label_place_holder=[[address_place_holder]] :label_disable=label_disabled />
+                      @input="check_addr" :label_place_holder=[[address_place_holder]] :label_disabled=disable_label />
     </div>
 
     <div class="flex-form-btn">
@@ -83,7 +83,7 @@ export default {
       type:String
     },
     btn_text:String,
-    label_disabled:{
+    disable_label:{
       default:false,
       type:Boolean
     },

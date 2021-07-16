@@ -16,7 +16,7 @@
       </div>
 
       <TuggleButton :number="2" style="margin-bottom: 0; margin-top: 5px" @click="changeVue"/>
-      <UserInformationForm btn_text="ثبت نام" style="margin-top: 25px" v-if="activeTab==='profile2'"/>
+      <UserInformationForm btn_text="ثبت نام" :disable_label="true" style="margin-top: 25px" v-if="activeTab==='profile2'"/>
 
       <Table :rows="rows" :headers="headers" v-if="activeTab==='receipts2'" style="width: 75%; height: 45%"/>
 

@@ -2,19 +2,20 @@
   <label v-if="label_kind === 'normal'" class="flex-text-area">
     <div class="input-labels">{{label_name}}</div>
     <input v-model="normal_text" :id="[[label_name]]" class="text-input-part"
-           :disabled=label_disabled :type=[[label_type]] :placeholder=[[label_place_holder]]>
+           :disabled="label_disabled" :type=[[label_type]] :placeholder=[[label_place_holder]]>
   </label>
 
   <label v-else-if="label_kind === 'pass'" class="flex-text-area">
     <div class="input-labels">{{label_name}}</div>
-    <input v-model="pass_text" id="pass_input" class="text-input-part" :disabled=label_disabled
+    <input v-model="pass_text" id="pass_input" class="text-input-part" :disabled="label_disabled"
            :type=[[label_type]] minlength="6" :placeholder=[[label_place_holder]] autocomplete="on">
   </label>
 
   <label v-else class="flex-text-address">
     <div class="address-input-labels">{{label_name}}</div>
+
     <input v-model="addr_text" id="address_input" class="address-text-input-part"
-           :disabled=label_disabled :type=[[label_type]] :placeholder=[[label_place_holder]]>
+           :disabled="label_disabled" :type=[[label_type]] :placeholder=[[label_place_holder]]>
   </label>
 
 </template>
@@ -27,11 +28,11 @@ export default {
     label_type:String,
     label_place_holder:String,
     label_kind: {
-      default: "normal",
-      type: String
+      default:"normal",
+      type:String
     },
     label_disabled: {
-      default: false,
+      default:false,
       type:Boolean
     }
   },
