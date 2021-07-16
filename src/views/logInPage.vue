@@ -82,7 +82,8 @@ export default {
       let user_pass = this.$refs.login_pass.pass_text
       console.log(user_email)
       console.log(user_pass)
-      this.validation_result = user_email === "root" && user_pass === "123";
+      this.validation_result = this.check_email() && this.check_pass() &&
+          user_email === "root@gmail.com" && user_pass === "12345678";
       this.$refs.loginModel.openModal()
     },
     true_input_changes(element){
@@ -100,9 +101,11 @@ export default {
       if (this.$refs.login_email.check_length('normal') && this.$refs.login_email.validateEmail()) {
         // name.className = 'true-input'
         this.true_input_changes(email)
+        return true
       }
       else {
         this.wrong_input_changes(email)
+        return false
       }
     },
     check_pass() {
@@ -110,9 +113,11 @@ export default {
       if (this.$refs.login_pass.check_length('pass')) {
         // name.className = 'true-input'
         this.true_input_changes(pass)
+        return true
       }
       else {
         this.wrong_input_changes(pass)
+        return false
       }
     },
   }

@@ -52,7 +52,7 @@ export default {
       }
       else if (kind === "pass") {
         value = this.pass_text
-        return 8 < value.length && value.length < 256
+        return 7 < value.length && value.length < 256
       }
       else {
         value = this.addr_text
