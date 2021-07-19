@@ -66,6 +66,8 @@ import Footer from "../components/Footer";
 import InputTextFiled from "../components/InputTextFiled";
 import Button from "../components/Button";
 import Modal from "../components/Modal";
+import { getAPI } from "../axios-api";
+
 export default {
   name: "logInPage",
   components: {Modal, Button, InputTextFiled, Footer, Header},
@@ -110,6 +112,9 @@ export default {
     },
     check_pass() {
       let pass = document.getElementById('id_login_pass')
+      getAPI.get('/store/').then((response) => {
+        console.log(response.data)
+      })
       if (this.$refs.login_pass.check_length('pass')) {
         // name.className = 'true-input'
         this.true_input_changes(pass)
