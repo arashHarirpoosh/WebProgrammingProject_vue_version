@@ -12,7 +12,7 @@
         <Table :rows="rows" :headers="headers"/>
       </div>
     </div>
-    <Footer/>
+    <Footer style="position: fixed"/>
     <router-view/>
   </div>
 </template>

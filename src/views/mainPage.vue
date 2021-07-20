@@ -12,16 +12,15 @@
 
       <div class="flex-others">
         <div class="order-part">
-          <div>
+          <div style="margin-right: 15px;">
             مرتب سازی بر اساس:
           </div>
-          <button>بیشترین فروش</button>
-          <button>قیمت</button>
+          <button class="sort_btn">بیشترین فروش</button>
+          <button class="sort_btn">قیمت</button>
         </div>
-        <div class="products-part">
-          <div class="flex-item-product">
 
-          </div>
+        <div class="products-part">
+          <ProducstList ref="pro"/>
           <div class="flex-item-filters">
 
             <FilterBox :categories="categories"/>
@@ -50,9 +49,11 @@ import Footer from "@/components/Footer";
 import HeroHeader from "../components/HeroHeader";
 import ArrowDown from "../components/ArrowDown";
 import FilterBox from "../components/FilterBox";
+import ProducstList from "../components/ProducstList";
 export default {
-  name: 'App',
+  name: 'Main',
   components: {
+    ProducstList,
     FilterBox,
     ArrowDown,
     Header,
@@ -60,11 +61,14 @@ export default {
     Footer
   },
   data(){
-    return{categories: []}
+    return{
+      categories: []
+    }
   },
   created() {
     this.categories = ["دسته بندی 1", "دسته بندی 2", "دسته بندی 3", "دسته بندی 4", "دسته بندی 5"]
-  }
+  },
+
 }
 </script>
 
@@ -79,6 +83,10 @@ export default {
 }
 
 *{box-sizing: border-box}
+html body{
+  height: 100%;
+}
+
 
 /*
     Flex Container that contains menu, hero header, others and footer
@@ -93,7 +101,7 @@ export default {
   /*top: 65px;*/
   height: 100%;
   width: 100%;
-  /*overflow: scroll;*/
+  overflow-y: auto;
   /*background-color: gray;*/
 }
 
@@ -138,8 +146,9 @@ export default {
   font-size: 1.5vw;
   /*height: 50px;*/
   margin: 7.5px;
+  margin-bottom: 0;
   background-color: white;
-  border: 1px solid blue;
+  border: 1px solid #47b847;
 }
 /*
     Design of the product part
@@ -149,18 +158,23 @@ export default {
   display: flex;
   flex-direction: row;
   /*align-items: center;*/
-  margin: 7.5px;
+  margin: 0 7.5px 7.5px;
   background-color: rgb(247, 247, 247);
-  border: 1px solid blue;
+  border: 2px solid blue;
 }
 /*
     Design the partition of the part which product cards placed
  */
 .flex-item-product {
-  flex: 75%;
-  margin: 7.5px;
-  background-color: white;
-  border: 1px solid orchid;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  flex: 77%;
+  padding-bottom: 0;
+  margin: 0 7px;
+  background-color: rgb(247, 247, 247);
+  justify-content: space-between;
+  border: 1px solid red;
   /*overflow: scroll;*/
 }
 /*
@@ -170,7 +184,7 @@ export default {
   display: flex;
   flex-direction: column;
   width: 25%;
-  height: 60%;
+  height: 70%;
   border: solid yellow;
   padding: 0;
   direction: rtl;
@@ -185,6 +199,26 @@ export default {
   background-color: white;
   border: 1px solid orchid;
 }
+.sort_btn{
+  margin-right: 15px;
+  border: none;
+  background-color: white;
+}
+
+.sort_btn:hover {
+  margin-top: 0px;
+  -moz-box-shadow: 0px 0px 4px 1px grey;
+  -webkit-box-shadow: 0px 0px 4px 1px grey;
+  box-shadow: 0px 0px 4px 1px  grey;
+}
+.sort_btn:focus{
+  background-color: rgb(0, 157, 255);
+  color: white;
+  border-radius: 20px;
+  font-size: 15px;
+  padding: 6px 10px;
+}
+
 #app {
   /*font-family: Avenir, Helvetica, Arial, sans-serif;*/
   font-size: 16px;
