@@ -12,8 +12,8 @@
         <i class="fa fa-caret-down"></i>
       </button>
       <div class="dropdown-content">
-        <a href="\signUp">{{ firstBtn }}</a>
-        <a href="\logIn">{{secondBtn}}</a>
+        <a :href=firstBtnHrf>{{ firstBtn }}</a>
+        <a :href=secondBtnHrf>{{secondBtn}}</a>
       </div>
     </div>
 
@@ -27,7 +27,9 @@ export default {
     return {
       dropDownBtn: 'ورود / ثبت نام',
       firstBtn: 'ثبت نام',
-      secondBtn: 'ورود'
+      secondBtn: 'ورود',
+      firstBtnHrf: '\\signUp',
+      secondBtnHrf: '\\logIn',
     }
   },
   methods: {

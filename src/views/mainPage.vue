@@ -31,9 +31,8 @@
 
           </div>
         </div>
+        <Footer/>
       </div>
-
-      <Footer/>
       <router-view/>
 
     </div>
@@ -99,7 +98,7 @@ html body{
   left: 0;
   top: 0;
   /*top: 65px;*/
-  height: 100%;
+  height: 95%;
   width: 100%;
   overflow-y: auto;
   /*background-color: gray;*/

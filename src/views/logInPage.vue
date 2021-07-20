@@ -91,15 +91,16 @@ export default {
         let req = {
           'username':user_email,
           'password':user_pass}
-        getAPI.post('/store/login', req).then((response) => {
-          console.log(response.data)
-          this.validation_result = response.data['validation']
-          if (this.validation_result) {
-            this.$refs.header.dropDownBtn = response.data['name']
-            this.$refs.header.firstBtn = 'پروفایل'
-            this.$refs.header.secondBtn = 'خروج از حساب'
-          }
-        })
+          getAPI.post('/store/login', req).then((response) => {
+            console.log(response.data)
+            this.validation_result = response.data['validation']
+            if (this.validation_result) {
+              this.$refs.header.dropDownBtn = response.data['name']
+              this.$refs.header.firstBtn = 'پروفایل'
+              this.$refs.header.firstBtnHrf = '\\userProfile'
+              this.$refs.header.secondBtn = 'خروج از حساب'
+            }
+          })
       }
       this.$refs.loginModel.openModal()
     },

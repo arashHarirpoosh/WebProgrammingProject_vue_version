@@ -219,7 +219,7 @@ export default {
       }
     },
     checkInputs() {
-      return  this.check_name_input() && this.check_family_name() && this.check_email()
+      return this.check_name_input() && this.check_family_name() && this.check_email()
           && this.check_pass() && this.check_addr()
     },
     signupValidation(){
