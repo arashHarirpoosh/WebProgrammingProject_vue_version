@@ -91,7 +91,12 @@ export default {
         let req = {
           'username':user_email,
           'password':user_pass}
-          getAPI.post('/store/login', req).then((response) => {
+        let config = {
+          headers: {
+            "Authorization": 'token'
+          },
+        };
+          getAPI.post('/store/login', req, config).then((response) => {
             console.log(response.data)
             this.validation_result = response.data['validation']
             if (this.validation_result) {

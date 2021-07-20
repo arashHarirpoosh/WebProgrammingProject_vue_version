@@ -89,13 +89,13 @@ export default {
       let element = document.getElementById(id_kind)
       element.style.border = "1px solid forestgreen"
       element.style.borderRadius = "0.25em"
-      element.style.boxShadow = "0 0 15px forestgreen"
+      element.style.boxShadow = "0 0 10px forestgreen"
     },
     wrong_input_changes(id_kind){
       let element = document.getElementById(id_kind)
       element.style.border = "1px solid red"
       element.style.borderRadius = "0.25em"
-      element.style.boxShadow = "0 0 15px red"
+      element.style.boxShadow = "0 0 7px red"
     },
 
   }
@@ -220,7 +220,7 @@ export default {
   width  : 100%;
   padding: 0;
 
-  font-size: 80%;
+  font-size: 0.75vw;
   color: red;
   /*background-color: white;*/
   border-radius: 0 0 5px 5px;
