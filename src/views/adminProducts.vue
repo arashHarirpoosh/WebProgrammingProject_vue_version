@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-    <Footer/>
+    <Footer style="position: fixed"/>
     <router-view/>
   </div>
 </template>

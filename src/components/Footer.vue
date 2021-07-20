@@ -18,12 +18,13 @@ export default {
   /*flex: 5%;*/
   flex-shrink: 0;
   left: 0;
-  bottom: 0;
+  bottom: 20px;
   width: 100%;
   background-color: rgb(49, 52, 54);
   color: rgb(114, 120, 125);
   text-align: center;
   font-size: 1vw;
+  /*position: fixed;*/
   /*border: 1px solid red;*/
 
 }

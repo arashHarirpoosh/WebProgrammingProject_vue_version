@@ -5,7 +5,7 @@
     <div id="mainContainer">
       <div class="container">
         <h2 ref="ss" id="ss">ادمین عزیز، خوش آمدید</h2>
-        <ToggleButton @click="changeVue" :number="3"/>
+        <ToggleButton @click="changeVue" :number="3" style="margin-top: 0"/>
 
         <div v-if="activeTab==='categoryLists'">
           <input class="btn_createProduct" type="button" value="+ایجاد دسته بندی جدید"/>
@@ -24,7 +24,7 @@
 
       </div>
     </div>
-    <Footer/>
+    <Footer style="position: fixed"/>
     <router-view/>
   </div>
 
@@ -195,9 +195,10 @@ html, body{
 .container{
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
   height: 80%;
-  width: 80%;
+  width: 70%;
   border: solid red;
 }
 .title_part {
@@ -222,7 +223,7 @@ html, body{
   justify-content: center;
   border: solid yellow;
   margin-top: 25px;
-  width: 100%;
+  width: 90%;
   height: 60%;
 }
 </style>

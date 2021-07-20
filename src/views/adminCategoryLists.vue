@@ -12,7 +12,7 @@
         <ClassListTable :list-rows="listRows" :listHeaders="listHeaders"/>
       </div>
     </div>
-    <Footer/>
+    <Footer style="position: fixed"/>
     <router-view/>
   </div>
 

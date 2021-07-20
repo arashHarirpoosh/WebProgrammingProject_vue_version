@@ -23,16 +23,7 @@ export default {
 </script>
 
 <style scoped>
-.flex-item-filters{
-  display: flex;
-  flex-direction: column;
-  width: 25%;
-  height: 100%;
-  border: solid yellow;
-  padding: 0;
-  direction: rtl;
 
-}
 #filtersContainer{
   display: flex;
   /*flex-wrap: wrap;*/
@@ -43,6 +34,7 @@ export default {
   height: 100%;
   width: 100%;
   padding-bottom: 0;
+  margin-top: 15px;
 }
 
 #filtersTitle{
@@ -56,7 +48,7 @@ export default {
   border: solid red;
   direction: ltr;
   overflow-y: scroll;
-  height: 130px;
+  height: 90%;
   width: 100%;
   margin-bottom: 0;
 }

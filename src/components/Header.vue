@@ -37,7 +37,7 @@ export default {
 
   .navbar {
     overflow: hidden;
-    /*position: fixed;*/
+    position: fixed;
     flex-shrink: 0;
     right: 0;
     top: 0;
