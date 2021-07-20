@@ -28,7 +28,7 @@
 <!--          <Button btn_text="ثبت نام"/>-->
 <!--        </div>-->
 <!--      </form>-->
-      <UserInformationForm btn_text="ثبت نام"/>
+      <UserInformationForm btn_text="ثبت نام" :is-sign-up-btn="true"/>
     </div>
     <!--Footer-->
     <Footer/>

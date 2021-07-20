@@ -1,19 +1,19 @@
 <template>
   <div class="navbar">
     <a href="">
-      <div class="store_text">فروشگاه</div>
+      <div class="store_text" @click="redirect">فروشگاه</div>
     </a>
-    <a href="#contact">صفحه اول</a>
+    <a href="\main">صفحه اول</a>
     <a href="#contact">تماس با ما</a>
     <a href="#contact">پشتیبانی</a>
     <a href="#news">محصولات</a>
     <div class="dropdown">
-      <button class="dropbtn">ورود / ثبت نام
+      <button class="dropbtn"> {{dropDownBtn}}
         <i class="fa fa-caret-down"></i>
       </button>
       <div class="dropdown-content">
-        <a href="#">ثبت نام</a>
-        <a href="#">ورود</a>
+        <a href="#">{{ firstBtn }}</a>
+        <a href="#">{{secondBtn}}</a>
       </div>
     </div>
 
@@ -22,7 +22,19 @@
 
 <script>
 export default {
-  name: "Header"
+  name: "Header",
+  data(){
+    return {
+      dropDownBtn: 'ورود / ثبت نام',
+      firstBtn: 'ثبت نام',
+      secondBtn: 'ورود'
+    }
+  },
+  methods: {
+    redirect(){
+      this.$router.push('/main')
+    }
+  }
 }
 </script>
 

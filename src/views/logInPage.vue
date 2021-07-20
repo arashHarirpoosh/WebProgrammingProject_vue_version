@@ -1,7 +1,7 @@
 <template>
   <div class="flex-main-container">
 
-    <Header/>
+    <Header ref="header"/>
 
     <div class="flex-content">
       <form class="flex-main-box">
@@ -84,8 +84,23 @@ export default {
       let user_pass = this.$refs.login_pass.pass_text
       console.log(user_email)
       console.log(user_pass)
-      this.validation_result = this.check_email() && this.check_pass() &&
-          user_email === "root@gmail.com" && user_pass === "12345678";
+
+      // this.validation_result = this.check_email() && this.check_pass() &&
+      //     user_email === "root@gmail.com" && user_pass === "12345678";
+      if (this.check_email() && this.check_pass() ) {
+        let req = {
+          'username':user_email,
+          'password':user_pass}
+        getAPI.post('/store/login', req).then((response) => {
+          console.log(response.data)
+          this.validation_result = response.data['validation']
+          if (this.validation_result) {
+            this.$refs.header.dropDownBtn = response.data['name']
+            this.$refs.header.firstBtn = 'پروفایل'
+            this.$refs.header.secondBtn = 'خروج از حساب'
+          }
+        })
+      }
       this.$refs.loginModel.openModal()
     },
     true_input_changes(element){
@@ -112,9 +127,9 @@ export default {
     },
     check_pass() {
       let pass = document.getElementById('id_login_pass')
-      getAPI.get('/store/').then((response) => {
-        console.log(response.data)
-      })
+      // getAPI.get('/store/').then((response) => {
+      //   console.log(response.data)
+      // })
       if (this.$refs.login_pass.check_length('pass')) {
         // name.className = 'true-input'
         this.true_input_changes(pass)

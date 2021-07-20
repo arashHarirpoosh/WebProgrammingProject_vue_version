@@ -23,7 +23,8 @@
     </div>
 
     <div class="flex-form-btn">
-      <Button :btn_text=btn_text @click="check_inputs"/>
+      <Button :btn_text=btn_text @click="signupValidation" v-if="isSignUpBtn"/>
+<!--      <Button :btn_text=btn_text @click="check_inputs" v-else/>-->
       <Modal ref="user_info_modal">
         <template v-slot:header>
           <!--            <h1>Modal title</h1>-->
@@ -34,7 +35,8 @@
         </template>
 
         <template v-slot:body>
-          <p>ثبت نام / ویرایش با موفقیت انجام شد</p>
+          <p v-if="validation_result">ثبت نام با موفقیت انجام شد</p>
+          <p v-else>ثبت نام با موفقیت انجام نشد</p>
         </template>
 
 <!--        <template v-slot:footer>-->
@@ -57,6 +59,7 @@
 import InputTextFiled from "./InputTextFiled";
 import Button from "./Button";
 import Modal from "./Modal";
+import {getAPI} from "../axios-api";
 
 export default {
   name: "UserInformationForm",
@@ -83,6 +86,7 @@ export default {
       type:String
     },
     btn_text:String,
+    isSignUpBtn: Boolean,
     disable_label:{
       default:false,
       type:Boolean
@@ -94,28 +98,29 @@ export default {
   },
   data() {
     return {
-      input_name: "",
-      family_name:"",
-      user_email:"",
-      user_pass:"",
-      user_addr:""
+      // input_name: "",
+      // family_name:"",
+      // user_email:"",
+      // user_pass:"",
+      // user_addr:"",
+      validation_result: false
     }
   },
 
   methods: {
-    update_values() {
-      this.input_name = this.$refs.form_name.normal_text
-      this.family_name = this.$refs.form_family_name.normal_text
-      this.user_email = this.$refs.form_email.normal_text
-      this.user_pass = this.$refs.form_pass.pass_text
-      this.user_addr = this.$refs.form_address.addr_text
-    },
-    check_inputs(){
-      this.update_values()
-      this.$refs.user_info_modal.openModal()
-      console.log(this.input_name)
-      return true
-    },
+    // update_values() {
+    //   this.input_name = this.$refs.form_name.normal_text
+    //   this.family_name = this.$refs.form_family_name.normal_text
+    //   this.user_email = this.$refs.form_email.normal_text
+    //   this.user_pass = this.$refs.form_pass.pass_text
+    //   this.user_addr = this.$refs.form_address.addr_text
+    // },
+    // check_inputs(){
+    //   this.update_values()
+    //   this.$refs.user_info_modal.openModal()
+    //   console.log(this.input_name)
+    //   return true
+    // },
     true_input_changes(element){
       element.style.border = "1px solid forestgreen"
       element.style.borderRadius = "0.25em"
@@ -131,9 +136,11 @@ export default {
       if (this.$refs.form_name.check_length('normal')) {
         // name.className = 'true-input'
         this.true_input_changes(name)
+        return true
       }
       else {
         this.wrong_input_changes(name)
+        return false
       }
     },
     check_family_name() {
@@ -141,9 +148,11 @@ export default {
       if (this.$refs.form_family_name.check_length('normal')) {
         // name.className = 'true-input'
         this.true_input_changes(family_name)
+        return true
       }
       else {
         this.wrong_input_changes(family_name)
+        return false
       }
     },
     check_email() {
@@ -151,9 +160,11 @@ export default {
       if (this.$refs.form_email.check_length('normal') && this.$refs.form_email.validateEmail()) {
         // name.className = 'true-input'
         this.true_input_changes(email)
+        return true
       }
       else {
         this.wrong_input_changes(email)
+        return false
       }
     },
     check_pass() {
@@ -161,9 +172,11 @@ export default {
       if (this.$refs.form_pass.check_length('pass')) {
         // name.className = 'true-input'
         this.true_input_changes(pass)
+        return true
       }
       else {
         this.wrong_input_changes(pass)
+        return false
       }
     },
     check_addr() {
@@ -171,13 +184,35 @@ export default {
       if (this.$refs.form_address.check_length('addr')) {
         // name.className = 'true-input'
         this.true_input_changes(addr)
+        return true
       }
       else {
         this.wrong_input_changes(addr)
+        return false
       }
+    },
+    checkInputs() {
+      return  this.check_name_input() && this.check_family_name() && this.check_email()
+          && this.check_pass() && this.check_addr()
+    },
+    signupValidation(){
+      if (this.checkInputs()) {
+        let req = {
+          'name':this.$refs.form_name.normal_text,
+          'familyName':this.$refs.form_family_name.normal_text,
+          'email':this.$refs.form_email.normal_text,
+          'password':this.$refs.form_pass.pass_text,
+          'address':this.$refs.form_address.addr_text
+          }
+        getAPI.post('/store/signup', req).then((response) => {
+          console.log(response.data)
+          this.validation_result = response.data['result']
+        })
+      }
+      this.$refs.user_info_modal.openModal()
     }
+  },
 
-  }
 }
 </script>
 
