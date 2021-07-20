@@ -1,24 +1,24 @@
 <template>
   <form class="flex-main-box">
     <div class="flex-parts-signup">
-      <InputTextFiled  ref="form_name" id="name_part" label_name="نام" label_type="text" @input="check_name_input"
+      <InputTextFiled  ref="form_name" label_id="name_part" label_name="نام" label_type="text" @input="check_name_input"
                        :label_place_holder=[[name_place_holder]] :label_disabled=disable_label />
-      <InputTextFiled ref="form_family_name" id="family_name_part" label_name="نام خانوادگی" label_type="text"
+      <InputTextFiled ref="form_family_name" label_id="family_name_part" label_name="نام خانوادگی" label_type="text"
                       @input="check_family_name"
                       :label_place_holder=[[family_name_place_holder]] :label_disabled=disable_label />
     </div>
 
     <div class="flex-parts-signup">
-      <InputTextFiled ref="form_email" id="email_part" label_name="ایمیل" label_type="email" @input="check_email"
+      <InputTextFiled ref="form_email" label_id="email_part" label_name="ایمیل" label_type="email" @input="check_email"
                       :label_place_holder=[[email_place_holder]] :label_disabled=disable_label />
 
       <!--          ToDo:min-length need to be added-->
-      <InputTextFiled ref="form_pass" id="pass_part" label_kind="pass" label_name="رمز عبور" label_type="password"
+      <InputTextFiled ref="form_pass" label_id="pass_part" label_kind="pass" label_name="رمز عبور" label_type="password"
                       @input="check_pass" :label_place_holder=[[password_place_holder]] :label_disabled=disable_label />
     </div>
 
     <div class="flex-parts-signup">
-      <InputTextFiled ref="form_address" id="addr_part" label_kind="address" true label_name="آدرس" label_type="text"
+      <InputTextFiled ref="form_address" label_id="addr_part" label_kind="address" true label_name="آدرس" label_type="text"
                       @input="check_addr" :label_place_holder=[[address_place_holder]] :label_disabled=disable_label />
     </div>
 
@@ -121,73 +121,100 @@ export default {
     //   console.log(this.input_name)
     //   return true
     // },
-    true_input_changes(element){
-      element.style.border = "1px solid forestgreen"
-      element.style.borderRadius = "0.25em"
-      element.style.boxShadow = "0 0 15px forestgreen"
-    },
-    wrong_input_changes(element){
-      element.style.border = "1px solid red"
-      element.style.borderRadius = "0.25em"
-      element.style.boxShadow = "0 0 15px red"
-    },
+    // true_input_changes(element){
+    //   element.style.border = "1px solid forestgreen"
+    //   element.style.borderRadius = "0.25em"
+    //   element.style.boxShadow = "0 0 15px forestgreen"
+    // },
+    // wrong_input_changes(element){
+    //   element.style.border = "1px solid red"
+    //   element.style.borderRadius = "0.25em"
+    //   element.style.boxShadow = "0 0 15px red"
+    // },
     check_name_input() {
-      let name = document.getElementById('name_part')
+      // let name = document.getElementById('name_part')
       if (this.$refs.form_name.check_length('normal')) {
         // name.className = 'true-input'
-        this.true_input_changes(name)
+        // this.true_input_changes(name)
+        this.$refs.form_name.true_input_changes('name_part')
+        this.$refs.form_name.error_msg = ""
         return true
       }
       else {
-        this.wrong_input_changes(name)
+        // this.wrong_input_changes(name)
+        this.$refs.form_name.wrong_input_changes('name_part')
+        this.$refs.form_name.error_msg = "لطفا نام خود را وارد کنید"
         return false
       }
     },
     check_family_name() {
-      let family_name = document.getElementById('family_name_part')
+      // let family_name = document.getElementById('family_name_part')
       if (this.$refs.form_family_name.check_length('normal')) {
         // name.className = 'true-input'
-        this.true_input_changes(family_name)
+        // this.true_input_changes(family_name)
+        this.$refs.form_family_name.true_input_changes('family_name_part')
+        this.$refs.form_family_name.error_msg = ""
         return true
       }
       else {
-        this.wrong_input_changes(family_name)
+        // this.wrong_input_changes(family_name)
+        this.$refs.form_family_name.wrong_input_changes('family_name_part')
+        this.$refs.form_family_name.error_msg = "لطفا نام خانوادگی خود را وارد کنید"
         return false
       }
     },
     check_email() {
-      let email = document.getElementById('email_part')
-      if (this.$refs.form_email.check_length('normal') && this.$refs.form_email.validateEmail()) {
+      // let email = document.getElementById('email_part')
+      let emailLength = this.$refs.form_email.check_length('normal')
+      let emailFormat = this.$refs.form_email.validateEmail()
+      if (emailLength && emailFormat) {
         // name.className = 'true-input'
-        this.true_input_changes(email)
+        // this.true_input_changes(email)
+        this.$refs.form_email.true_input_changes('email_part')
+        this.$refs.form_email.error_msg = ''
         return true
       }
       else {
-        this.wrong_input_changes(email)
+        // this.wrong_input_changes(email)
+        this.$refs.form_email.wrong_input_changes('email_part')
+        if (emailLength === false) {
+          this.$refs.form_email.error_msg = 'لطفا ایمیل خود را وارد کنید'
+        }
+        if (emailFormat === false) {
+          this.$refs.form_email.error_msg = 'فرمت ایمیل وارد شده صحیح نمی باشد'
+        }
         return false
       }
     },
     check_pass() {
-      let pass = document.getElementById('pass_part')
+      // let pass = document.getElementById('pass_part')
       if (this.$refs.form_pass.check_length('pass')) {
         // name.className = 'true-input'
-        this.true_input_changes(pass)
+        // this.true_input_changes(pass)
+        this.$refs.form_pass.true_input_changes('pass_part')
+        this.$refs.form_pass.error_msg = ''
         return true
       }
       else {
-        this.wrong_input_changes(pass)
+        // this.wrong_input_changes(pass)
+        this.$refs.form_pass.wrong_input_changes('pass_part')
+        this.$refs.form_pass.error_msg = 'حداقل 8 کاراکتر برای رمز عبور نیاز است'
         return false
       }
     },
     check_addr() {
-      let addr = document.getElementById('addr_part')
+      // let addr = document.getElementById('addr_part')
       if (this.$refs.form_address.check_length('addr')) {
         // name.className = 'true-input'
-        this.true_input_changes(addr)
+        // this.true_input_changes(addr)
+        this.$refs.form_address.true_input_changes('addr_part')
+        this.$refs.form_address.error_msg = ''
         return true
       }
       else {
-        this.wrong_input_changes(addr)
+        // this.wrong_input_changes(addr)
+        this.$refs.form_address.wrong_input_changes('addr_part')
+        this.$refs.form_address.error_msg = 'لطفا آدرس خود را وارد کنید'
         return false
       }
     },
@@ -241,7 +268,7 @@ export default {
   display: flex;
   justify-content: center;
   flex-direction: row;
-  margin: 7px;
+  margin: 3px;
   width: 70%;
   /*border: 1px solid red;*/
   direction: rtl;

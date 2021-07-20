@@ -12,8 +12,8 @@
         <i class="fa fa-caret-down"></i>
       </button>
       <div class="dropdown-content">
-        <a href="#">{{ firstBtn }}</a>
-        <a href="#">{{secondBtn}}</a>
+        <a href="\signUp">{{ firstBtn }}</a>
+        <a href="\logIn">{{secondBtn}}</a>
       </div>
     </div>
 

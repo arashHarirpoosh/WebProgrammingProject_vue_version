@@ -10,13 +10,13 @@
         </div>
 
         <div class="flex-parts-login">
-          <InputTextFiled ref="login_email" id="id_login_email" @input="check_email"
+          <InputTextFiled ref="login_email" label_id="id_login_email" @input="check_email"
                           label_name="ایمیل" label_type="email" label_place_holder="ایمیل خود را وارد کنید..."/>
 
         </div>
 
         <div class="flex-parts-login">
-          <InputTextFiled ref="login_pass" id="id_login_pass" @input="check_pass"
+          <InputTextFiled ref="login_pass" label_id="id_login_pass" @input="check_pass"
                           label_kind="pass" label_name="رمز عبور" label_type="password" label_place_holder="رمز عبور خود را وارد کنید..."/>
 <!--          <InputTextFiled label_name="رمز عبور" v-bind:label_disable=false label_type="password" label_place_holder="رمز عبور خود را وارد کنید..."/>-->
         </div>
@@ -103,40 +103,48 @@ export default {
       }
       this.$refs.loginModel.openModal()
     },
-    true_input_changes(element){
-      element.style.border = "1px solid forestgreen"
-      element.style.borderRadius = "0.25em"
-      element.style.boxShadow = "0 0 15px forestgreen"
-    },
-    wrong_input_changes(element){
-      element.style.border = "1px solid red"
-      element.style.borderRadius = "0.25em"
-      element.style.boxShadow = "0 0 15px red"
-    },
+    // true_input_changes(element){
+    //   element.style.border = "1px solid forestgreen"
+    //   element.style.borderRadius = "0.25em"
+    //   element.style.boxShadow = "0 0 15px forestgreen"
+    // },
+    // wrong_input_changes(element){
+    //   element.style.border = "1px solid red"
+    //   element.style.borderRadius = "0.25em"
+    //   element.style.boxShadow = "0 0 15px red"
+    // },
     check_email() {
-      let email = document.getElementById('id_login_email')
-      if (this.$refs.login_email.check_length('normal') && this.$refs.login_email.validateEmail()) {
-        // name.className = 'true-input'
-        this.true_input_changes(email)
+      let emailLength = this.$refs.login_email.check_length('normal')
+      let emailFormat = this.$refs.login_email.validateEmail()
+      console.log(emailFormat)
+      if (emailLength && emailFormat) {
+        this.$refs.login_email.true_input_changes('id_login_email')
+        this.$refs.login_email.error_msg = ''
         return true
       }
       else {
-        this.wrong_input_changes(email)
+        this.$refs.login_email.wrong_input_changes('id_login_email')
+        if (emailLength === false) {
+          this.$refs.login_email.error_msg = 'لطفا ایمیل خود را وارد کنید'
+        }
+        if (emailFormat === false) {
+          this.$refs.login_email.error_msg = 'فرمت ایمیل وارد شده صحیح نمی باشد'
+        }
         return false
       }
     },
     check_pass() {
-      let pass = document.getElementById('id_login_pass')
       // getAPI.get('/store/').then((response) => {
       //   console.log(response.data)
       // })
       if (this.$refs.login_pass.check_length('pass')) {
-        // name.className = 'true-input'
-        this.true_input_changes(pass)
+        this.$refs.login_pass.true_input_changes('id_login_pass')
+        this.$refs.login_pass.error_msg = ""
         return true
       }
       else {
-        this.wrong_input_changes(pass)
+        this.$refs.login_pass.wrong_input_changes('id_login_pass')
+        this.$refs.login_pass.error_msg = 'حداقل 8 کاراکتر برای رمز عبور نیاز است'
         return false
       }
     },

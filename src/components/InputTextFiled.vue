@@ -1,22 +1,34 @@
 <template>
-  <label v-if="label_kind === 'normal'" class="flex-text-area">
-    <div class="input-labels">{{label_name}}</div>
-    <input v-model="normal_text" :id="[[label_name]]" class="text-input-part"
-           :disabled="label_disabled" :type=[[label_type]] :placeholder=[[label_place_holder]]>
-  </label>
+  <div v-if="label_kind === 'normal'" class="input-container">
+    <label class="flex-text-area" :id=[[label_id]]>
+      <div class="input-labels">{{label_name}}</div>
+      <input v-model="normal_text" :id="[[label_name]]" class="text-input-part"
+             :disabled="label_disabled" :type=[[label_type]] :placeholder=[[label_place_holder]]>
+    </label>
 
-  <label v-else-if="label_kind === 'pass'" class="flex-text-area">
-    <div class="input-labels">{{label_name}}</div>
-    <input v-model="pass_text" id="pass_input" class="text-input-part" :disabled="label_disabled"
-           :type=[[label_type]] minlength="6" :placeholder=[[label_place_holder]] autocomplete="on">
-  </label>
+    <span class="error">{{error_msg}}</span>
+  </div>
 
-  <label v-else class="flex-text-address">
-    <div class="address-input-labels">{{label_name}}</div>
+  <div  v-else-if="label_kind === 'pass'" class="input-container">
+    <label class="flex-text-area" :id=[[label_id]]>
+      <div class="input-labels">{{label_name}}</div>
+      <input v-model="pass_text" id="pass_input" class="text-input-part" :disabled="label_disabled"
+             :type=[[label_type]] minlength="6" :placeholder=[[label_place_holder]] autocomplete="on">
+    </label>
 
-    <input v-model="addr_text" id="address_input" class="address-text-input-part"
-           :disabled="label_disabled" :type=[[label_type]] :placeholder=[[label_place_holder]]>
-  </label>
+    <span class="error">{{error_msg}}</span>
+  </div>
+
+  <div v-else class="input-addr-container">
+    <label class="flex-text-address" :id=[[label_id]]>
+      <div class="address-input-labels">{{label_name}}</div>
+      <input v-model="addr_text" id="address_input" class="address-text-input-part"
+             :disabled="label_disabled" :type=[[label_type]] :placeholder=[[label_place_holder]]>
+    </label>
+
+    <span class="error">{{error_msg}}</span>
+  </div>
+
 
 </template>
 
@@ -24,6 +36,7 @@
 export default {
   name: "InputTextFiled",
   props: {
+    label_id:String,
     label_name:String,
     label_type:String,
     label_place_holder:String,
@@ -40,7 +53,8 @@ export default {
     return {
       normal_text: "",
       pass_text: "",
-      addr_text: ""
+      addr_text: "",
+      error_msg: ""
     };
   },
   methods: {
@@ -70,20 +84,44 @@ export default {
       let email = this.normal_text
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return this.check_length('normal') && re.test(String(email).toLowerCase())
-    }
-
+    },
+    true_input_changes(id_kind){
+      let element = document.getElementById(id_kind)
+      element.style.border = "1px solid forestgreen"
+      element.style.borderRadius = "0.25em"
+      element.style.boxShadow = "0 0 15px forestgreen"
+    },
+    wrong_input_changes(id_kind){
+      let element = document.getElementById(id_kind)
+      element.style.border = "1px solid red"
+      element.style.borderRadius = "0.25em"
+      element.style.boxShadow = "0 0 15px red"
+    },
 
   }
 }
 </script>
 
 <style scoped>
+
+.input-container {
+  flex: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-addr-container {
+  flex: 100%;
+  height: 10vw;
+  display: flex;
+  flex-direction: column;
+}
 /*
     Design inner partition of each row
  */
 .flex-text-area {
   font-size: 1.2vw;
-  flex: 50%;
+  /*flex: 50%;*/
   height: 2.75vw;
   display: flex;
   flex-direction: row;
@@ -130,7 +168,6 @@ export default {
     Design of the address part of the form
  */
 .flex-text-address {
-  height: 10vw;
   /*height: 40px;*/
   font-size: 1.2vw;
   flex: 100%;
@@ -138,7 +175,7 @@ export default {
   align-items: center;
   flex-direction: row;
   margin: 5px;
-  width: 50%;
+  width: 99%;
   /*border: 1px solid red;*/
   /*direction: rtl;*/
   /*height: 100%;*/
@@ -178,4 +215,20 @@ export default {
 
 }
 
+/* This is the style of our error messages */
+.error {
+  width  : 100%;
+  padding: 0;
+
+  font-size: 80%;
+  color: red;
+  /*background-color: white;*/
+  border-radius: 0 0 5px 5px;
+
+  box-sizing: border-box;
+}
+
+.error.active {
+  padding: 0.3em;
+}
 </style>
