@@ -98,6 +98,12 @@ export default {
       element.style.borderRadius = "0.25em"
       element.style.boxShadow = "0 0 7px red"
     },
+    reset_input_change(id_kind){
+      let element = document.getElementById(id_kind)
+      element.style.border = "1px solid white"
+      element.style.borderRadius = "0.25em"
+      element.style.boxShadow = "0 0 7px white"
+    }
 
   }
 }

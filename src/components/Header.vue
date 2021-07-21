@@ -6,7 +6,7 @@
     <a href="\main">صفحه اول</a>
     <a href="#contact">تماس با ما</a>
     <a href="#contact">پشتیبانی</a>
-    <a href="#news">محصولات</a>
+    <a href="\main#products">محصولات</a>
     <div class="dropdown">
       <button class="dropbtn"> {{dropDownBtn}}
         <i class="fa fa-caret-down"></i>

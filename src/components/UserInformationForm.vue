@@ -92,10 +92,10 @@ export default {
       default: true,
       type: Boolean
     },
-    disable_label:{
-      default:false,
-      type:Boolean
-    },
+    // disable_label:{
+    //   default:false,
+    //   type:Boolean
+    // },
     modal_header_text:{
       default:"ثبت نام در سایت",
       type:String
@@ -108,6 +108,7 @@ export default {
       // user_email:"",
       // user_pass:"",
       // user_addr:"",
+      disable_label: false,
       name_place_holder: "نام خود را وارد کنید...",
       family_name_place_holder: "نام خانوادگی خود را وارد کنید...",
       email_place_holder: "ایمیل خود را وارد کنید...",
@@ -116,9 +117,13 @@ export default {
       validation_result: false
     }
   },
+  created() {
+    this.disable_label = !this.is_signup;
+  },
   mounted() {
     this.$refs.form_name.label_disabled = this.disable_label
     this.$refs.form_family_name.label_disabled = this.disable_label
+    // this.$refs.form_email.label_disabled = this.disable_label
     this.$refs.form_pass.label_disabled = this.disable_label
     this.$refs.form_address.label_disabled = this.disable_label
   },
@@ -270,7 +275,7 @@ export default {
       }
     },
 
-    editProfile(){
+    async editProfile(){
       if (this.disable_label) {
         this.$refs.form_name.label_disabled = false
         this.$refs.form_name.label_disabled = false
@@ -287,22 +292,24 @@ export default {
           'password':this.$refs.form_pass.pass_text,
           'address':this.$refs.form_address.addr_text
         }
-        getAPI.post('/store/userprofile', req).then((response) => {
+        await getAPI.post('/store/userprofile', req).then((response) => {
           console.log(response.data)
           this.validation_result = response.data['result']
           if (this.validation_result) {
             this.$refs.form_name.label_disabled = true
-            this.$refs.form_name.label_disabled = true
+            this.$refs.form_name.reset_input_change('name_part')
             this.$refs.form_family_name.label_disabled = true
+            this.$refs.form_family_name.reset_input_change('family_name_part')
             this.$refs.form_pass.label_disabled = true
+            this.$refs.form_pass.reset_input_change('pass_part')
             this.$refs.form_address.label_disabled = true
-            this.name_place_holder = req['name']
-            this.family_name_place_holder = req['familyName']
-            this.password_place_holder = req['password']
-            this.address_place_holder = req['address']
+            this.$refs.form_address.reset_input_change('addr_part')
+            this.name_place_holder = response.data['first_name']
+            this.family_name_place_holder = response.data['last_name']
+            this.address_place_holder = response.data['address']
           }
         })
-        // this.disable_label = true
+        this.disable_label = true
       }
     }
   },

@@ -19,7 +19,7 @@
           <button class="sort_btn">قیمت</button>
         </div>
 
-        <div class="products-part">
+        <div id="products" class="products-part">
           <ProducstList ref="pro"/>
           <div class="flex-item-filters">
 

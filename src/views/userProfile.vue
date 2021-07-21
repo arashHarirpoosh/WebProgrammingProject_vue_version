@@ -88,7 +88,6 @@ export default {
       ]
     ]
   },
-
   methods:{
     changeVue(e){
       this.activeTab = e.target.id
