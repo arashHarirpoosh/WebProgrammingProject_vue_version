@@ -49,6 +49,7 @@ import HeroHeader from "../components/HeroHeader";
 import ArrowDown from "../components/ArrowDown";
 import FilterBox from "../components/FilterBox";
 import ProducstList from "../components/ProducstList";
+
 export default {
   name: 'Main',
   components: {

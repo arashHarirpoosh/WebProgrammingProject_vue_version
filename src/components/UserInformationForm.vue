@@ -228,7 +228,7 @@ export default {
       return this.check_name_input() && this.check_family_name() && this.check_email()
           && this.check_pass() && this.check_addr()
     },
-    signupValidation(){
+    async signupValidation(){
       if (this.checkInputs()) {
         let req = {
           'name':this.$refs.form_name.normal_text,
@@ -237,12 +237,28 @@ export default {
           'password':this.$refs.form_pass.pass_text,
           'address':this.$refs.form_address.addr_text
           }
-        getAPI.post('/store/signup', req).then((response) => {
+        await getAPI.post('/store/signup', req).then((response) => {
           console.log(response.data)
           this.validation_result = response.data['result']
         })
       }
       this.$refs.user_info_modal.openModal()
+      if (this.validation_result) {
+        let req = {
+          'username':this.$refs.form_email.normal_text,
+          'password':this.$refs.form_pass.pass_text
+        }
+        await getAPI.post('/store/login', req).then((response) => {
+          console.log(response.data)
+          this.validation_result = response.data['validation']
+          if (this.validation_result) {
+            this.$refs.header.dropDownBtn = response.data['name']
+            this.$refs.header.firstBtn = 'پروفایل'
+            this.$refs.header.firstBtnHrf = '\\userProfile'
+            this.$refs.header.secondBtn = 'خروج از حساب'
+          }
+        })
+      }
     }
   },
 
