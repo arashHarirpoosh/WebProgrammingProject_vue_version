@@ -24,6 +24,7 @@
 
     <div class="flex-form-btn">
       <Button :btn_text=btn_text @click="signupValidation" v-if="isSignUpBtn"/>
+      <Button :btn_text=btn_text v-else/>
 <!--      <Button :btn_text=btn_text @click="check_inputs" v-else/>-->
       <Modal ref="user_info_modal">
         <template v-slot:header>
@@ -65,26 +66,26 @@ export default {
   name: "UserInformationForm",
   components: {Modal, Button, InputTextFiled},
   props:{
-    name_place_holder:{
-      default:"نام خود را وارد کنید...",
-      type:String
-    },
-    family_name_place_holder:{
-      default:"نام خانوادگی خود را وارد کنید...",
-      type:String
-    },
-    email_place_holder:{
-      default:"ایمیل خود را وارد کنید...",
-      type:String
-    },
-    password_place_holder:{
-      default:"رمز عبور خود را وارد کنید...",
-      type:String
-    },
-    address_place_holder:{
-      default:"آدرس خود را وارد کنید...",
-      type:String
-    },
+    // name_place_holder:{
+    //   default:"نام خود را وارد کنید...",
+    //   type:String
+    // },
+    // family_name_place_holder:{
+    //   default:"نام خانوادگی خود را وارد کنید...",
+    //   type:String
+    // },
+    // email_place_holder:{
+    //   default:"ایمیل خود را وارد کنید...",
+    //   type:String
+    // },
+    // password_place_holder:{
+    //   default:"رمز عبور خود را وارد کنید...",
+    //   type:String
+    // },
+    // address_place_holder:{
+    //   default:"آدرس خود را وارد کنید...",
+    //   type:String
+    // },
     btn_text:String,
     isSignUpBtn: Boolean,
     disable_label:{
@@ -103,6 +104,11 @@ export default {
       // user_email:"",
       // user_pass:"",
       // user_addr:"",
+      name_place_holder: "نام خود را وارد کنید...",
+      family_name_place_holder: "نام خانوادگی خود را وارد کنید...",
+      email_place_holder: "ایمیل خود را وارد کنید...",
+      password_place_holder: "رمز عبور خود را وارد کنید...",
+      address_place_holder: "آدرس خود را وارد کنید...",
       validation_result: false
     }
   },

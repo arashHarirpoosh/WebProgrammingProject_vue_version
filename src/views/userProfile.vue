@@ -16,7 +16,8 @@
       </div>
 
       <TuggleButton :number="2" style="margin-bottom: 0; margin-top: 5px" @click="changeVue"/>
-      <UserInformationForm btn_text="ثبت نام" :disable_label="true" style="margin-top: 25px" v-if="activeTab==='profile2'"/>
+      <UserInformationForm ref="userInfoForm" btn_text="ویرایش اطلاعات" :disable_label="true"
+                           style="margin-top: 25px" v-if="activeTab==='profile2'"/>
 
       <Table :rows="rows" :headers="headers" v-if="activeTab==='receipts2'" style="width: 75%; height: 45%"/>
 
@@ -33,6 +34,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import TuggleButton from "../components/ToggleButton";
 import Table from "../components/Table";
+import {getAPI} from "../axios-api";
 export default {
   name: "userProfile",
   components: {Table, TuggleButton, Footer, Header, UserInformationForm},
@@ -44,6 +46,7 @@ export default {
     }
   },
   created() {
+    this.getUserInfo()
     this.headers = [
       "کد پیگیری",
       "کالا",
@@ -87,6 +90,20 @@ export default {
   methods:{
     changeVue(e){
       this.activeTab = e.target.id
+      if (this.activeTab === 'profile2'){
+        this.getUserInfo()
+      }
+    },
+    async getUserInfo(){
+      let req = {'data': 'profile'}
+      await getAPI.post('/store/userprofile', req).then((response) => {
+        console.log(response.data)
+        this.$refs.userInfoForm.name_place_holder = response.data['first_name']
+        this.$refs.userInfoForm.family_name_place_holder = response.data['last_name']
+        this.$refs.userInfoForm.email_place_holder = response.data['email']
+        // this.$refs.userInfoForm.password_place_holder = response.data['password']
+        this.$refs.userInfoForm.address_place_holder = response.data['address']
+      })
     }
   }
 }
