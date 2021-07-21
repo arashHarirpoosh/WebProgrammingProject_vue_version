@@ -1,7 +1,7 @@
 <template>
   <div class="flex-item-product">
     <div id="productsContainer">
-      <ProductCard :key="product.name" v-for="product in current_products" :product="product"/>
+      <ProductCard :key="product.productName" v-for="product in current_products" :product="product"/>
     </div>
     <PageButtons @click="click" :btn_num="numOfPages"/>
   </div>
@@ -276,7 +276,7 @@ export default {
   },
 
   methods:{
-    click(e){
+     async click(e){
       // console.log(e.target.id)
       if (e.target.id === 'next'){
         if (this.currentPage !== this.numOfPages){
@@ -289,7 +289,7 @@ export default {
           let end = this.currentPage * this.numOfProsInPage - 1
           console.log(start, end)
           this.current_products.length = 0
-          this.current_products = this.products
+          // this.current_products = this.products
         }
       }
       else if(e.target.id === 'previous'){
@@ -303,7 +303,7 @@ export default {
           let end = this.currentPage * this.numOfProsInPage - 1
           console.log(start, end)
           this.current_products.length = 0
-          this.current_products = this.products
+          // this.current_products = this.products
         }
       }
       else {
@@ -315,11 +315,11 @@ export default {
           let end = this.currentPage * this.numOfProsInPage - 1
           console.log(start, end)
           this.current_products.length = 0
-          this.current_products = this.products
+          // this.current_products = this.products
         }
       }
 
-      if (this.currentPage == 1){
+      if (this.currentPage === 1){
         document.getElementById("previous").classList.add("disable")
         document.getElementById("previous").classList.remove("nextPre_btn")
         document.getElementById("previous").disabled = true
@@ -331,7 +331,7 @@ export default {
         document.getElementById("previous").disabled = false
         console.log(document.getElementById("previous").classList)
       }
-      if(this.currentPage == this.numOfPages){
+      if(this.currentPage === this.numOfPages){
         document.getElementById("next").classList.add("disable")
         document.getElementById("next").classList.remove("nextPre_btn")
         document.getElementById("next").disabled = true
@@ -343,8 +343,9 @@ export default {
         document.getElementById("next").disabled = false
         console.log(document.getElementById("next").classList)
       }
-      this.getData()
-    },
+     await this.getData()
+     this.current_products = this.products
+     },
     async fetchNumOfData(){
       // let req = {'order':'price',
       //   'pageNumber': this.pageNumber}

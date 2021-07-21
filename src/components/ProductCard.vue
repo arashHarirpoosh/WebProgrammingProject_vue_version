@@ -7,7 +7,7 @@
       </div>
 
       <div class="details">
-        <div><p style="margin: 0; font-weight: bold; font-size: 18px">{{ product.name }}</p></div>
+        <div><p style="margin: 0; font-weight: bold; font-size: 18px">{{ product.productName }}</p></div>
         <div><p style="margin: 0; font-size: 14px; color: #616060">{{ product.category }}</p></div>
       </div>
     </div>
