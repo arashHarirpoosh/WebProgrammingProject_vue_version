@@ -79,7 +79,7 @@ export default {
   },
 
   methods:{
-    validate_login(){
+    async validate_login(){
       let user_email = this.$refs.login_email.normal_text
       let user_pass = this.$refs.login_pass.pass_text
       console.log(user_email)
@@ -96,7 +96,7 @@ export default {
             "Authorization": 'token'
           },
         };
-          getAPI.post('/store/login', req, config).then((response) => {
+          await getAPI.post('/store/login', req, config).then((response) => {
             console.log(response.data)
             this.validation_result = response.data['validation']
             if (this.validation_result) {

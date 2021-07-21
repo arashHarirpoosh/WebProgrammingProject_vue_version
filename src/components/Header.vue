@@ -11,9 +11,10 @@
       <button class="dropbtn"> {{dropDownBtn}}
         <i class="fa fa-caret-down"></i>
       </button>
-      <div class="dropdown-content">
+      <div class="dropdown-content" >
         <a :href=firstBtnHrf>{{ firstBtn }}</a>
-        <a :href=secondBtnHrf>{{secondBtn}}</a>
+        <a v-if="logOut" :href=secondBtnHrf @click="sendLogoutRequest">{{secondBtn}}</a>
+        <a v-else :href=secondBtnHrf>{{secondBtn}}</a>
       </div>
     </div>
 
@@ -21,6 +22,8 @@
 </template>
 
 <script>
+import {getAPI} from "../axios-api";
+
 export default {
   name: "Header",
   data(){
@@ -30,11 +33,38 @@ export default {
       secondBtn: 'ورود',
       firstBtnHrf: '\\signUp',
       secondBtnHrf: '\\logIn',
+      logOut:false
     }
+  },
+  async mounted() {
+    await getAPI.get('/store/login').then((response) => {
+      console.log(response.data)
+      let sigIn = response.data['signIn']
+      if (sigIn) {
+        this.dropDownBtn = response.data['name']
+        this.firstBtn = 'پروفایل'
+        this.firstBtnHrf = '\\userProfile'
+        this.secondBtnHrf = '\\logIn'
+        this.secondBtn = 'خروج از حساب'
+        this.logOut = true
+      }
+    })
   },
   methods: {
     redirect(){
       this.$router.push('/main')
+    },
+    async sendLogoutRequest(){
+      await getAPI.get('/store/logout').then((response) => {
+        console.log('logout')
+        console.log(response.data)
+        this.dropDownBtn = 'ورود / ثبت نام'
+        this.firstBtn = 'ثبت نام'
+        this.firstBtnHrf = '\\signUp'
+        this.secondBtnHrf = '\\logIn'
+        this.secondBtn = 'ورود'
+        this.logOut = false
+      })
     }
   }
 }

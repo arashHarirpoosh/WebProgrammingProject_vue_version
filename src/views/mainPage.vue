@@ -4,8 +4,8 @@
     <div class="flex-main-container">
 
       <div class="title_part">
-        <ArrowDown/>
-        <Header/>
+        <ArrowDown />
+        <Header />
       </div>
 
       <HeroHeader />
