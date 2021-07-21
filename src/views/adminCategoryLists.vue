@@ -57,6 +57,15 @@ export default {
       },
       {
         className: "دسته بندی"
+      },
+      {
+        className: "دسته بندی"
+      },
+      {
+        className: "دسته بندی"
+      },
+      {
+        className: "دسته بندی"
       }
     ]
     this.number =3

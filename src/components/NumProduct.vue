@@ -1,6 +1,6 @@
 <template>
   <div class="num_productBox">
-    <span class="number">{{ product.number }}</span>
+    <span class="number">{{ product.numberOfProducts }}</span>
     <div class="proBox">
 
       <div class="imageDetails">
@@ -9,32 +9,87 @@
         </div>
 
         <div class="details">
-          <div><p style="margin: 0; font-weight: bold; font-size: 20px">{{ product.name }}</p></div>
-          <div><p style="margin: 0; font-size: 18px; color: #616060">{{ product.category }}</p></div>
+          <div><p ref="name" style="margin: 0; font-weight: bold; font-size: 20px">{{ product.productName }}</p></div>
+          <div><p ref="category" style="margin: 0; font-size: 18px; color: #616060">{{ product.category }}</p></div>
         </div>
       </div>
 
       <div class="priceRow">
         <div style="direction: rtl">
-          <p>{{ product.price }}</p>
+          <p ref="price">{{ product.price * 1000}} تومان</p>
         </div>
         <div>
-          <input class="btn_price_row" type="button" value="خرید محصول"/>
+          <input @click="editProduct" class="btn_price_row" type="button" value="ویرایش محصول"/>
         </div>
+
+        <Modal ref="product_editing">
+          <template v-slot:header><h3>ویرایش محصول</h3></template>
+
+          <template v-slot:body>
+            <ProductInputs ref="proInputs"/>
+          </template>
+
+          <template v-slot:footer>
+            <input @click="updateProduct" class="btn_price_row" type="button" value="ثبت ویرایش"/>
+          </template>
+        </Modal>
+
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Modal from "./Modal";
+import ProductInputs from "./ProductInputs";
+import {getAPI} from "../axios-api";
 export default {
   name: "NumProduct",
+  components: {ProductInputs, Modal},
   props: {
     product: Object
     // name: String,
     // category: String,
     // price: String,
     // number: Number
+  },
+  data(){
+    return{
+      bool: true,
+      proName: ""
+    }
+  },
+  methods:{
+    editProduct(){
+      this.$refs.product_editing.openModal()
+      // console.log(this.$refs.name.innerHTML)
+    },
+    async updateProduct(){
+      if (this.bool){
+        this.$refs.proInputs.$refs.proName.value = this.$refs.name.innerHTML
+        this.$refs.proInputs.$refs.proCategory.value = this.$refs.category.innerHTML
+        this.$refs.proInputs.$refs.proPrice.value = this.$refs.price.innerHTML
+        this.proName = this.product.productName
+        this.bool = false
+      }
+      else {
+        let price = this.$refs.proInputs.$refs.proPrice.value.split(" ")
+        price = parseInt(price[0])
+        let req = {
+          'editPro': 'true',
+          'productName': this.proName,
+          'productName2': this.$refs.proInputs.$refs.proName.value,
+          'price': price,
+          'numberOfProducts': this.product.numberOfProducts,
+          'numberOfPurchased': this.product.numberOfPurchased,
+          'category': this.$refs.proInputs.$refs.proCategory.value
+        }
+        await getAPI.post('/store/admin', req).then((response) => {
+          console.log(response.data)
+        })
+      }
+      // let user_email = this.$refs.proInputs.normal_text
+    }
   }
 }
 </script>
@@ -48,7 +103,8 @@ export default {
   width: 270px;
   height: 100%;
   border: solid;
-  margin-left: 10%;
+  margin-left: 15px;
+  margin-top: 10px;
 }
 
 .number{
@@ -60,8 +116,8 @@ export default {
   padding-top: 4px;
   color: rgb(14, 186, 197);
   z-index: 1;
-  top: -10px;
-  left: -22px;
+  top: -12px;
+  left: 0px;
   border: 1px solid gray;
   border-radius: 50%;
   box-shadow: 2px 8px 15px -4px #2d2d2d;

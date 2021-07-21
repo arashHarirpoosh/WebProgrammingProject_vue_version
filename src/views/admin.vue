@@ -10,21 +10,35 @@
         <div v-if="activeTab==='categoryLists'">
           <input class="btn_createProduct" type="button" value="+ایجاد دسته بندی جدید"/>
         </div>
+
         <ClassListTable :list-rows="listRows" :listHeaders="listHeaders" v-if="activeTab==='categoryLists'"/>
 
         <CodeSearch v-if="activeTab==='receipts3'"/>
         <Table :rows="rows" :headers="headers" v-if="activeTab==='receipts3'"/>
 
         <div>
-          <input class="btn_createProduct" type="button" value="+ایجاد محصول جدید" v-if="activeTab==='profile3'"/>
+          <input @click="addProduct" class="btn_createProduct" type="button" value="+ایجاد محصول جدید" v-if="activeTab==='profile3'"/>
         </div>
+
+        <Modal ref="create_product">
+          <template v-slot:header><h3>ایجاد محصول</h3></template>
+
+          <template v-slot:body>
+            <ProductCreate ref="addPro"/>
+          </template>
+
+          <template v-slot:footer>
+            <input @click="registerProduct" id="register_btn" type="button" value="ثبت محصول"/>
+          </template>
+        </Modal>
+
         <div id="productsList" v-if="activeTab==='profile3'">
           <NumProduct :key="product.name" v-for="product in products" :product="product"/>
         </div>
 
       </div>
     </div>
-    <Footer style="position: fixed"/>
+    <Footer/>
     <router-view/>
   </div>
 
@@ -39,10 +53,15 @@ import Table from "../components/Table";
 import ClassListTable from "../components/ClassListTable";
 import NumProduct from "../components/NumProduct";
 import CodeSearch from "../components/CodeSearch";
+import {getAPI} from "../axios-api";
+import Modal from "../components/Modal";
+import ProductCreate from "../components/ProductCreate";
 
 export default {
   name: 'admin',
   components: {
+    ProductCreate,
+    Modal,
     CodeSearch,
     NumProduct,
     ClassListTable,
@@ -64,30 +83,11 @@ export default {
   },
   created() {
     this.activeTab = 'profile3'
-    this.product ={
-      name: "موس گیمینگ ریزر",
-      category: "دسته بندی یک",
-      price: "10,000 تومان",
-      number: "12"
-    }
+    this.productInfo()
     this.listHeaders = {
       title1: "دسته بندی",
       title2: "عملیات"
     }
-    this.listRows = [
-      {
-        className: "دسته بندی"
-      },
-      {
-        className: "دسته بندی"
-      },
-      {
-        className: "دسته بندی"
-      },
-      {
-        className: "دسته بندی"
-      }
-    ]
     this.headers = [
       "کد پیگیری",
       "کالا",
@@ -133,33 +133,47 @@ export default {
       ]
     ]
 
-    this.products = [
-      {
-        name: "موس گیمینگ ریزر",
-        category: "دسته بندی یک",
-        price: "10,000 تومان",
-        number: "12"
-      },
-      {
-        name: "موس گیمینگ",
-        category: "دسته بندی یک",
-        price: "10,000 تومان",
-        number: "12"
-      },
-      {
-        name: "موس گیمینگ",
-        category: "دسته بندی یک",
-        price: "10,000 تومان",
-        number: "12"
-      }
-    ]
   },
   methods:{
     changeVue(e){
       this.activeTab = e.target.id
+      if (this.activeTab === 'profile3')
+        this.productInfo()
+      else if(this.activeTab === 'categoryLists')
+        this.categoryInfo()
         // document.getElementsByClassName(this.downBox_class).innerHTML = "kdlskdlks"
         // console.log(document.getElementsByClassName(this.downBox_class).innerHTML)
         //document.getElementsByClassName(this.downBox_class).innerHTML = "kdlskdlks
+    },
+    async productInfo(){
+      let req = {'request': 'products'}
+      await getAPI.post('/store/admin', req).then((response) => {
+        console.log(response.data)
+        this.products = response.data.slice(0, 3)
+      })
+    },
+    addProduct(){
+      this.$refs.create_product.openModal()
+    },
+    async registerProduct(){
+      let req = {
+        'createPro': 'true',
+        'productName': this.$refs.addPro.$refs.proName.value,
+        'price': parseInt(this.$refs.addPro.$refs.proPrice.value),
+        'numberOfProducts': parseInt(this.$refs.addPro.$refs.numOfProducts.value),
+        'numberOfPurchased': parseInt(this.$refs.addPro.$refs.numOfPurchased.value),
+        'category': this.$refs.addPro.$refs.proCategory.value
+      }
+      await getAPI.post('/store/admin', req).then((response) => {
+        console.log(response.data)
+      })
+    },
+    async categoryInfo() {
+      let req = {'categories': 'true'}
+      await getAPI.post('/store/admin', req).then((response) => {
+        console.log(response.data)
+        this.listRows = response.data
+      })
     }
   }
 
@@ -167,46 +181,39 @@ export default {
 </script>
 
 <style scoped>
-#final-template {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  border: solid;
-  height: 100%;
-}
+
 *{
   direction: rtl;
 }
-html, body{
-  height: 99%;
-  margin: 0;
-  padding: 0;
-  background-color: rgb(247, 247, 247);
+.flex-main-container {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  left: 0;
+  top: 0;
+  /*top: 65px;*/
+  height: 95%;
+  width: 100%;
+  overflow-y: auto;
+  /*background-color: gray;*/
 }
 #mainContainer{
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  height: 95%;
+  height: 100%;
   border: solid yellow;
 }
 .container{
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   align-items: center;
   height: 80%;
   width: 70%;
   border: solid red;
 }
-.title_part {
-  flex: 65px;
-  /*height: 65px;*/
-  /*background-color: #111111;*/
-  border: 1px solid red;
-}
+
 
 .btn_createProduct{
   background-color: rgb(0, 157, 255);
@@ -220,10 +227,21 @@ html, body{
 
 #productsList{
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   border: solid yellow;
   margin-top: 25px;
   width: 90%;
   height: 60%;
 }
+
+#register_btn{
+  background-color: rgb(0, 157, 255);
+  color: white;
+  border-radius: 20px;
+  font-size: 15px;
+  padding: 6px 10px;
+  box-shadow: 2px 8px 30px -3px rgb(0, 157, 255);
+}
+
 </style>
