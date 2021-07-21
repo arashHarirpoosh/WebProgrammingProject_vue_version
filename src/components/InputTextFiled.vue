@@ -44,13 +44,14 @@ export default {
       default:"normal",
       type:String
     },
-    label_disabled: {
-      default:false,
-      type:Boolean
-    }
+    // label_disabled: {
+    //   default:false,
+    //   type:Boolean
+    // }
   },
   data() {
     return {
+      label_disabled: false,
       normal_text: "",
       pass_text: "",
       addr_text: "",
@@ -136,6 +137,7 @@ export default {
  */
 .input-labels {
   flex: 20%;
+  max-width: 99px;
   height: 100%;
   font-size: 1.2vw;
   /*border: blueviolet;*/

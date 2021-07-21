@@ -5,10 +5,10 @@
 
     <div class="flex-content">
       <div class="flex-login-title" v-if="activeTab==='profile2'">
-        <div class="head1"><h3>هادی عزیز، خوش آمدید</h3></div>
+        <div class="head1"><h3>{{name}}، خوش آمدید</h3></div>
         <div id = "vertical"></div>
-        <div id="head2"><h6>موجودی حساب شما: 10,000 تومان</h6></div>
-        <div><button id="btn">افزایش موجودی</button></div>
+        <div id="head2"><h6>موجودی حساب شما:{{balance}} تومان</h6></div>
+        <div><button id="btn" @click="changeBalance">افزایش موجودی</button></div>
       </div>
 
       <div class="flex-login-title" v-if="activeTab==='receipts2'">
@@ -16,7 +16,7 @@
       </div>
 
       <TuggleButton :number="2" style="margin-bottom: 0; margin-top: 5px" @click="changeVue"/>
-      <UserInformationForm ref="userInfoForm" btn_text="ویرایش اطلاعات" :disable_label="true"
+      <UserInformationForm ref="userInfoForm" :is_signup="false" btn_text="ویرایش اطلاعات" :disable_label="true"
                            style="margin-top: 25px" v-if="activeTab==='profile2'"/>
 
       <Table :rows="rows" :headers="headers" v-if="activeTab==='receipts2'" style="width: 75%; height: 45%"/>
@@ -42,7 +42,9 @@ export default {
     return{
       headers: [],
       rows: [],
-      activeTab: 'profile2'
+      activeTab: 'profile2',
+      name: 'هادی',
+      balance: 10000
     }
   },
   created() {
@@ -95,14 +97,24 @@ export default {
       }
     },
     async getUserInfo(){
-      let req = {'data': 'profile'}
+      let req = {'method': 'getProfile'}
       await getAPI.post('/store/userprofile', req).then((response) => {
         console.log(response.data)
         this.$refs.userInfoForm.name_place_holder = response.data['first_name']
         this.$refs.userInfoForm.family_name_place_holder = response.data['last_name']
-        this.$refs.userInfoForm.email_place_holder = response.data['email']
+        // this.$refs.userInfoForm.email_place_holder = response.data['email']
         // this.$refs.userInfoForm.password_place_holder = response.data['password']
         this.$refs.userInfoForm.address_place_holder = response.data['address']
+        this.name = response.data['first_name']
+        this.balance = response.data['balance']
+      })
+    },
+
+    async changeBalance(){
+      let req = {'method': 'changeBalance'}
+      await getAPI.post('/store/userprofile', req).then((response) => {
+        console.log(response.data)
+        this.balance = response.data['balance']
       })
     }
   }

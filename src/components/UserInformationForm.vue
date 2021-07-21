@@ -9,7 +9,7 @@
     </div>
 
     <div class="flex-parts-signup">
-      <InputTextFiled ref="form_email" label_id="email_part" label_name="ایمیل" label_type="email" @input="check_email"
+      <InputTextFiled v-if="is_signup" ref="form_email" label_id="email_part" label_name="ایمیل" label_type="email" @input="check_email"
                       :label_place_holder=[[email_place_holder]] :label_disabled=disable_label />
 
       <!--          ToDo:min-length need to be added-->
@@ -24,7 +24,7 @@
 
     <div class="flex-form-btn">
       <Button :btn_text=btn_text @click="signupValidation" v-if="isSignUpBtn"/>
-      <Button :btn_text=btn_text v-else/>
+      <Button ref="editBtn" :btn_text=btn_text @click="editProfile" v-else/>
 <!--      <Button :btn_text=btn_text @click="check_inputs" v-else/>-->
       <Modal ref="user_info_modal">
         <template v-slot:header>
@@ -88,6 +88,10 @@ export default {
     // },
     btn_text:String,
     isSignUpBtn: Boolean,
+    is_signup:{
+      default: true,
+      type: Boolean
+    },
     disable_label:{
       default:false,
       type:Boolean
@@ -112,7 +116,12 @@ export default {
       validation_result: false
     }
   },
-
+  mounted() {
+    this.$refs.form_name.label_disabled = this.disable_label
+    this.$refs.form_family_name.label_disabled = this.disable_label
+    this.$refs.form_pass.label_disabled = this.disable_label
+    this.$refs.form_address.label_disabled = this.disable_label
+  },
   methods: {
     // update_values() {
     //   this.input_name = this.$refs.form_name.normal_text
@@ -258,6 +267,42 @@ export default {
             this.$refs.header.secondBtn = 'خروج از حساب'
           }
         })
+      }
+    },
+
+    editProfile(){
+      if (this.disable_label) {
+        this.$refs.form_name.label_disabled = false
+        this.$refs.form_name.label_disabled = false
+        this.$refs.form_family_name.label_disabled = false
+        this.$refs.form_pass.label_disabled = false
+        this.$refs.form_address.label_disabled = false
+        this.disable_label = false
+      }
+      else {
+        let req = {
+          'method': 'edit',
+          'name':this.$refs.form_name.normal_text,
+          'familyName':this.$refs.form_family_name.normal_text,
+          'password':this.$refs.form_pass.pass_text,
+          'address':this.$refs.form_address.addr_text
+        }
+        getAPI.post('/store/userprofile', req).then((response) => {
+          console.log(response.data)
+          this.validation_result = response.data['result']
+          if (this.validation_result) {
+            this.$refs.form_name.label_disabled = true
+            this.$refs.form_name.label_disabled = true
+            this.$refs.form_family_name.label_disabled = true
+            this.$refs.form_pass.label_disabled = true
+            this.$refs.form_address.label_disabled = true
+            this.name_place_holder = req['name']
+            this.family_name_place_holder = req['familyName']
+            this.password_place_holder = req['password']
+            this.address_place_holder = req['address']
+          }
+        })
+        // this.disable_label = true
       }
     }
   },

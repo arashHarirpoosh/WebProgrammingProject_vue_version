@@ -8,7 +8,7 @@
         <Header />
       </div>
 
-      <HeroHeader />
+      <HeroHeader ref="heroHeader" @searchResult="searchData" />
 
       <div class="flex-others">
         <div class="order-part">
@@ -68,6 +68,14 @@ export default {
   created() {
     this.categories = ["دسته بندی 1", "دسته بندی 2", "دسته بندی 3", "دسته بندی 4", "دسته بندی 5"]
   },
+
+  methods: {
+    searchData(){
+      this.$refs.pro.current_products = this.$refs.heroHeader.search_result
+    }
+
+  }
+
 
 }
 </script>

@@ -12,7 +12,8 @@
         </div>
         <!-- Search input -->
         <div class="search">
-          <input class="search-input" type="text" placeholder="نام محصول خود را وارد کنید" id="secondBox_txtBox">
+          <input v-model='search_input' class="search-input" type="text" placeholder="نام محصول خود را وارد کنید"
+                 id="secondBox_txtBox" @keyup.enter="searchProduct">
         </div>
         <!-- Previous Button -->
         <div class="slider-btn">
@@ -22,7 +23,7 @@
 
       <div class="btn-part">
         <!--      <button class="search-btn">جستجو کنید</button>-->
-        <Button btn_text="جستجو کنید"/>
+        <Button btn_text="جستجو کنید" @click="searchProduct"/>
       </div>
 
     </div>
@@ -44,6 +45,8 @@ import img3 from "../assets/slidesPhoto/slider3.jpg"
 import clockImg from "../assets/clock.png"
 import compImg from "../assets/slidesPhoto/computer.png"
 import toolsImg from "../assets/slidesPhoto/tools.jpg"
+import {getAPI} from "../axios-api";
+import mainPage from "../views/mainPage";
 
 export default {
   name: "HeroHeader",
@@ -51,7 +54,9 @@ export default {
   data(){
     return {
       slideIndex: 0,
-      imgAddr:img1
+      imgAddr:img1,
+      search_input:'',
+      search_result:[]
     }
   },
   mounted() {
@@ -96,6 +101,18 @@ export default {
       this.slideIndex %= 3
 
       this.showSlides();
+    },
+
+    async searchProduct(){
+      let req = {'method': 'search',
+        'order':'price',
+        'searchParam': this.search_input}
+      await getAPI.post('/store/products', req).then((response) => {
+        console.log(response.data)
+
+        this.search_result = response.data['products']
+      })
+      this.$emit('searchResult', mainPage)
     }
   },
 }

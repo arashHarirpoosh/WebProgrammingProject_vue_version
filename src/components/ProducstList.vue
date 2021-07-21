@@ -355,7 +355,8 @@ export default {
       })
     },
     async getData(){
-      let req = {'order':'price',
+      let req = {'method': 'pagination',
+                 'order':'price',
                  'pageNumber': this.currentPage}
       await getAPI.post('/store/products', req).then((response) => {
         console.log(response.data)
