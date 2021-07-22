@@ -2,6 +2,7 @@
   <div class="flex-item-product">
     <div id="productsContainer">
       <ProductCard :key="product.productName" v-for="product in current_products" :product="product"/>
+      <span v-if="current_products.length === 0">محصولی موجود نیست</span>
     </div>
     <PageButtons @click="click" :btn_num="numOfPages"/>
   </div>
