@@ -2,14 +2,32 @@
   <div class="flex-parts-login">
     <label class="flex-text-area">
       <div class="input-labels">جستجوی کد پیگیری</div>
-      <input class="text-input-part" type="email" placeholder="کد پیگیری را برای جستجو وارد کنید...">
+      <input @keyup="searchReceipt($event)" class="text-input-part" type="email"
+             placeholder="کد پیگیری را برای جستجو وارد کنید..." value="" ref="code_search">
     </label>
   </div>
 </template>
 
 <script>
+import {getAPI} from "../axios-api";
+
 export default {
-  name: "CodeSearch"
+  name: "CodeSearch",
+  methods:{
+    searchReceipt(e){
+      if (e.keyCode === 13){
+        let req = {
+          'receipts_search': 'true',
+          'trackingCode': parseInt(this.$refs.code_search.value)
+        }
+        // console.log(req)
+        getAPI.post('/store/admin', req).then((response) => {
+          console.log(response.data)
+          this.$parent.rows = response.data
+        })
+      }
+    }
+  }
 }
 </script>
 
