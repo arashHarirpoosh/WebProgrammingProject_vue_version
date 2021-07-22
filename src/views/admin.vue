@@ -8,10 +8,27 @@
         <ToggleButton @click="changeVue" :number="3" style="margin-top: 0"/>
 
         <div v-if="activeTab==='categoryLists'">
-          <input class="btn_createProduct" type="button" value="+ایجاد دسته بندی جدید"/>
+          <input @click="categoryCreation" class="btn_createProduct" type="button" value="+ایجاد دسته بندی جدید"/>
         </div>
 
-        <ClassListTable :list-rows="listRows" :listHeaders="listHeaders" v-if="activeTab==='categoryLists'"/>
+        <Modal ref="create_category">
+          <template v-slot:header><h3>ایجاد دسته بندی</h3></template>
+
+          <template v-slot:body>
+            <div class="flex-parts-login">
+              <label class="flex-text-area">
+                <div class="input-labels">نام دسته بندی</div>
+                <input class="text-input-part" type="text" ref="categoryName" value="">
+              </label>
+            </div>
+          </template>
+
+          <template v-slot:footer>
+            <input @click="createCategory" class="register_btn" type="button" value="ثبت ویرایش"/>
+          </template>
+        </Modal>
+
+        <ClassListTable @click="updateTable" :list-rows="listRows" :listHeaders="listHeaders" v-if="activeTab==='categoryLists'"/>
 
         <CodeSearch v-if="activeTab==='receipts3'"/>
         <Table :rows="rows" :headers="headers" v-if="activeTab==='receipts3'"/>
@@ -28,7 +45,7 @@
           </template>
 
           <template v-slot:footer>
-            <input @click="registerProduct" id="register_btn" type="button" value="ثبت محصول"/>
+            <input @click="registerProduct" class="register_btn" type="button" value="ثبت محصول"/>
           </template>
         </Modal>
 
@@ -168,12 +185,29 @@ export default {
         console.log(response.data)
       })
     },
-    async categoryInfo() {
+     categoryInfo() {
       let req = {'categories': 'true'}
-      await getAPI.post('/store/admin', req).then((response) => {
+      getAPI.post('/store/admin', req).then((response) => {
         console.log(response.data)
         this.listRows = response.data
       })
+    },
+    categoryCreation(){
+      this.$refs.create_category.openModal()
+    },
+    async createCategory(){
+      let req = {
+        'createCategory': 'true',
+        'category': this.$refs.categoryName.value
+      }
+      // console.log(req)
+      await getAPI.post('/store/admin', req).then((response) => {
+        console.log(response.data)
+      })
+      this.categoryInfo()
+    },
+    updateTable(){
+      this.categoryInfo()
     }
   }
 
@@ -202,7 +236,7 @@ export default {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  height: 98%;
   border: solid yellow;
 }
 .container{
@@ -235,7 +269,7 @@ export default {
   height: 60%;
 }
 
-#register_btn{
+.register_btn{
   background-color: rgb(0, 157, 255);
   color: white;
   border-radius: 20px;
