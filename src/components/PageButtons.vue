@@ -43,7 +43,7 @@ export default {
   justify-content: center;
   align-self: center;
   margin-bottom: 0;
-  border: solid blue;
+  /*border: solid blue;*/
   /*height: 5%;*/
 }
 

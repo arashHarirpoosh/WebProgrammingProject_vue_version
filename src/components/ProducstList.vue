@@ -384,7 +384,7 @@ export default {
   margin: 0 7px;
   background-color: rgb(247, 247, 247);
   justify-content: space-between;
-  border: 1px solid red;
+  /*border: 1px solid red;*/
   /*overflow: scroll;*/
 }
 #productsContainer{
@@ -392,7 +392,7 @@ export default {
   justify-content: flex-start;
   flex-direction: row;
   flex-wrap: wrap;
-  border: solid dodgerblue;
+  /*border: solid dodgerblue;*/
 
   /*height: 95%;*/
   width: 80%;
