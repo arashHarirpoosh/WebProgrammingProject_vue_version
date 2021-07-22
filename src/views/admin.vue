@@ -213,7 +213,7 @@ export default {
     },
 
     async receiptInfo(){
-      let req = {'receipts': 'true'}
+      let req = {'receipts_req': 'true'}
       await getAPI.post('/store/admin', req).then((response) => {
         console.log(response.data)
         this.rows = response.data
@@ -247,7 +247,7 @@ export default {
   align-items: center;
   justify-content: center;
   height: 98%;
-  border: solid yellow;
+  /*border: solid yellow;*/
 }
 .container{
   display: flex;
@@ -255,7 +255,7 @@ export default {
   align-items: center;
   height: 80%;
   width: 70%;
-  border: solid red;
+  /*border: solid red;*/
 }
 
 
@@ -273,7 +273,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  border: solid yellow;
+  /*border: solid yellow;*/
   margin-top: 25px;
   width: 90%;
   height: 60%;

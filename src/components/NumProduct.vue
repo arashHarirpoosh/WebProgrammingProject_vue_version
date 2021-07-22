@@ -102,7 +102,7 @@ export default {
   position: relative;
   width: 270px;
   height: 100%;
-  border: solid;
+  /*border: solid;*/
   margin-left: 15px;
   margin-top: 10px;
 }
@@ -118,7 +118,7 @@ export default {
   z-index: 1;
   top: -12px;
   left: 0px;
-  border: 1px solid gray;
+  /*border: 1px solid gray;*/
   border-radius: 50%;
   box-shadow: 2px 8px 15px -4px #2d2d2d;
 

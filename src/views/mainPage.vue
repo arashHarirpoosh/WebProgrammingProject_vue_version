@@ -107,7 +107,7 @@ html body{
   left: 0;
   top: 0;
   /*top: 65px;*/
-  height: 95%;
+  height: 93%;
   width: 100%;
   overflow-y: auto;
   /*background-color: gray;*/
@@ -121,7 +121,7 @@ html body{
   flex-shrink: 0;
   /*height: 65px;*/
   /*background-color: #111111;*/
-  border: 1px solid red;
+  /*border: 1px solid red;*/
 }
 
 /*
@@ -138,7 +138,7 @@ html body{
   /*height: 60%;*/
   /*padding:5px 5px 5px 5px;*/
   background-color: rgb(247, 247, 247);
-  border: 1px solid red;
+  /*border: 1px solid red;*/
 }
 
 /*
@@ -156,7 +156,7 @@ html body{
   margin: 7.5px;
   margin-bottom: 0;
   background-color: white;
-  border: 1px solid #47b847;
+  /*border: 1px solid #47b847;*/
 }
 /*
     Design of the product part
@@ -168,7 +168,7 @@ html body{
   /*align-items: center;*/
   margin: 0 7.5px 7.5px;
   background-color: rgb(247, 247, 247);
-  border: 2px solid blue;
+  /*border: 2px solid blue;*/
 }
 /*
     Design the partition of the part which product cards placed
@@ -182,7 +182,7 @@ html body{
   margin: 0 7px;
   background-color: rgb(247, 247, 247);
   justify-content: space-between;
-  border: 1px solid red;
+  /*border: 1px solid red;*/
   /*overflow: scroll;*/
 }
 /*
@@ -193,7 +193,7 @@ html body{
   flex-direction: column;
   width: 25%;
   height: 70%;
-  border: solid yellow;
+  /*border: solid yellow;*/
   padding: 0;
   direction: rtl;
 }

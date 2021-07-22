@@ -31,7 +31,7 @@ export default {
   border: 3px solid #d5cece;
   border-radius: .2em;
   box-shadow: 20px 20px 200px 1px #d5cece;
-  height: 100%;
+  height: 300px;
   width: 100%;
   padding-bottom: 0;
   margin-top: 15px;
@@ -45,7 +45,7 @@ export default {
 }
 
 .container{
-  border: solid red;
+  /*border: solid red;*/
   direction: ltr;
   overflow-y: scroll;
   height: 90%;
