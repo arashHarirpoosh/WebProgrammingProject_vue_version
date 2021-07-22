@@ -112,43 +112,43 @@ export default {
       "نام خریدار",
       "آدرس ارسال شده"
     ]
-    this.rows = [
-      [
-        "SHOP10230",
-        "موس گیمینگ ریزر",
-        "10,000 تومان",
-        "هادی",
-        "تهران، خیابان حافظ، دانشگاه امیرکبیر"
-      ],
-      [
-        "SHOP10230",
-        "موس گیمینگ ریزر",
-        "10,000 تومان",
-        "هادی",
-        "تهران، خیابان حافظ، دانشگاه امیرکبیر"
-      ],
-      [
-        "SHOP10230",
-        "موس گیمینگ ریزر",
-        "10,000 تومان",
-        "هادی",
-        "تهران، خیابان حافظ، دانشگاه امیرکبیر"
-      ],
-      [
-        "SHOP10230",
-        "موس گیمینگ ریزر",
-        "10,000 تومان",
-        "هادی",
-        "تهران، خیابان حافظ، دانشگاه امیرکبیر"
-      ],
-      [
-        "SHOP10230",
-        "موس گیمینگ ریزر",
-        "10,000 تومان",
-        "هادی",
-        "تهران، خیابان حافظ، دانشگاه امیرکبیر"
-      ]
-    ]
+    // this.rows = [
+    //   [
+    //     "SHOP10230",
+    //     "موس گیمینگ ریزر",
+    //     "10,000 تومان",
+    //     "هادی",
+    //     "تهران، خیابان حافظ، دانشگاه امیرکبیر"
+    //   ],
+    //   [
+    //     "SHOP10230",
+    //     "موس گیمینگ ریزر",
+    //     "10,000 تومان",
+    //     "هادی",
+    //     "تهران، خیابان حافظ، دانشگاه امیرکبیر"
+    //   ],
+    //   [
+    //     "SHOP10230",
+    //     "موس گیمینگ ریزر",
+    //     "10,000 تومان",
+    //     "هادی",
+    //     "تهران، خیابان حافظ، دانشگاه امیرکبیر"
+    //   ],
+    //   [
+    //     "SHOP10230",
+    //     "موس گیمینگ ریزر",
+    //     "10,000 تومان",
+    //     "هادی",
+    //     "تهران، خیابان حافظ، دانشگاه امیرکبیر"
+    //   ],
+    //   [
+    //     "SHOP10230",
+    //     "موس گیمینگ ریزر",
+    //     "10,000 تومان",
+    //     "هادی",
+    //     "تهران، خیابان حافظ، دانشگاه امیرکبیر"
+    //   ]
+    // ]
 
   },
   methods:{
@@ -158,6 +158,8 @@ export default {
         this.productInfo()
       else if(this.activeTab === 'categoryLists')
         this.categoryInfo()
+      else if(this.activeTab === 'receipts3')
+        this.receiptInfo()
         // document.getElementsByClassName(this.downBox_class).innerHTML = "kdlskdlks"
         // console.log(document.getElementsByClassName(this.downBox_class).innerHTML)
         //document.getElementsByClassName(this.downBox_class).innerHTML = "kdlskdlks
@@ -208,6 +210,14 @@ export default {
     },
     updateTable(){
       this.categoryInfo()
+    },
+
+    async receiptInfo(){
+      let req = {'receipts': 'true'}
+      await getAPI.post('/store/admin', req).then((response) => {
+        console.log(response.data)
+        this.rows = response.data
+      })
     }
   }
 
